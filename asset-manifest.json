@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/Awesome-Mapper/static/css/main.5f361e03.chunk.css",
+    "main.js": "/Awesome-Mapper/static/js/main.6faeca9c.chunk.js",
+    "main.js.map": "/Awesome-Mapper/static/js/main.6faeca9c.chunk.js.map",
+    "runtime-main.js": "/Awesome-Mapper/static/js/runtime-main.aa9aac9e.js",
+    "runtime-main.js.map": "/Awesome-Mapper/static/js/runtime-main.aa9aac9e.js.map",
+    "static/js/2.cf95cf1a.chunk.js": "/Awesome-Mapper/static/js/2.cf95cf1a.chunk.js",
+    "static/js/2.cf95cf1a.chunk.js.map": "/Awesome-Mapper/static/js/2.cf95cf1a.chunk.js.map",
+    "index.html": "/Awesome-Mapper/index.html",
+    "precache-manifest.d4052abded3a36417e5b4e44d5d209f5.js": "/Awesome-Mapper/precache-manifest.d4052abded3a36417e5b4e44d5d209f5.js",
+    "service-worker.js": "/Awesome-Mapper/service-worker.js",
+    "static/css/main.5f361e03.chunk.css.map": "/Awesome-Mapper/static/css/main.5f361e03.chunk.css.map",
+    "static/js/2.cf95cf1a.chunk.js.LICENSE.txt": "/Awesome-Mapper/static/js/2.cf95cf1a.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/Awesome-Mapper/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.aa9aac9e.js",
+    "static/js/2.cf95cf1a.chunk.js",
+    "static/css/main.5f361e03.chunk.css",
+    "static/js/main.6faeca9c.chunk.js"
+  ]
+}
