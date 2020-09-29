@@ -10,7 +10,7 @@ function App() {
         <p>
          Welcome to Awesome Mapper!
         </p>
-        This proyect is being developed by 
+        This project is being developed by 
         <a
           className="App-link"
           href="https://abujalance.com"
