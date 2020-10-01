@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2aa4c6ff481f45697b6dfebd908f4397",
+    "revision": "67d84bea09a360b32cded02b42107c2c",
     "url": "/Awesome-Mapper/index.html"
   },
   {
-    "revision": "b651fa2ef4e3d4386c59",
+    "revision": "8262b7f14d1db7f603cc",
     "url": "/Awesome-Mapper/static/css/main.c60f1abc.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Awesome-Mapper/static/js/2.76a7443a.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b651fa2ef4e3d4386c59",
-    "url": "/Awesome-Mapper/static/js/main.0e79f29f.chunk.js"
+    "revision": "8262b7f14d1db7f603cc",
+    "url": "/Awesome-Mapper/static/js/main.92b26fd2.chunk.js"
   },
   {
     "revision": "1aa35f0b529e8004a464",
