@@ -7,7 +7,9 @@ const Tile = (props) => {
     : process.env.PUBLIC_URL + "/images/empty.png";
   return (
     <td>
-      <img src={imgUrl} />
+      <div>
+        <img src={imgUrl} />
+      </div>
     </td>
   );
 };
