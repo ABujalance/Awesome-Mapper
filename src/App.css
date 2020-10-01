@@ -37,6 +37,11 @@
   }
 }
 
-.awesome-map{
+.awesome-map {
   line-height: 0;
+  border-style: solid;
+  border-color: black;
+}
+.btn-tile-selection {
+  background-size: cover;
 }

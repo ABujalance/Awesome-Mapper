@@ -1,30 +1,32 @@
-import React, { Component } from 'react'
+import React from "react";
+import Tile from "./Tile";
+import { useSelector } from "react-redux";
 
+const AwesomeMap = (props) => {
+  const tiles = useSelector((state) => state.awesomeMap);
 
-const AwesomeMap = (props)=>{
-   
-   const tiles = props.tiles
+  console.log("Here are the Tiles");
+  console.table(tiles);
 
-   return( 
-      <div className="awesome-map">
-         {tiles.map(renderMapRow)}
-      </div>
-      
-   );
-}
+  console.log("Hemos venio a bailar");
+  console.table(tiles);
+  console.log(tiles);
 
-const renderMapRow = (tileRow, index)=>{
-   return(
-      <tr key={index}>
-         {tileRow.map(renderMapTile)}
-      </tr>
-   )
-}
-const renderMapTile= (tile, index)=>{
-   const imgUrl=process.env.PUBLIC_URL +"/images/"+tile
-   return(
-      <td><img src={imgUrl} alt={imgUrl}/></td>
-   )
-}
+  return (
+    <div>
+      <div className="awesome-map">{tiles.map(renderMapRow)}</div>
+    </div>
+  );
+};
 
-export default AwesomeMap 
+const renderMapRow = (tileRow, index) => {
+  return (
+    <tr key={index}>
+      {tileRow.map((tileType) => {
+        return <Tile tileType={tileType} />;
+      })}
+    </tr>
+  );
+};
+
+export default AwesomeMap;
