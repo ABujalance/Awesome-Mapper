@@ -23,7 +23,11 @@ const TilesGallery = (props) => {
       {tileTypes.map((tileName) => {
         var tileType = process.env.PUBLIC_URL + "/images/" + tileName;
         return (
-          <div draggable onDrag={(event) => onDrag(event, tileName)}>
+          <div
+            className="drag-tile"
+            draggable
+            onDrag={(event) => onDrag(event, tileName)}
+          >
             <img src={tileType}></img>
           </div>
         );

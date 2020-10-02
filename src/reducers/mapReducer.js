@@ -33,11 +33,34 @@ export default function mapReducer(state = initialState, action) {
       const tileName = action.tileName;
       const x = action.x;
       const y = action.y;
-      return {
-        ...state,
-        awesomeMap: insertTile(x, y, tileName, state.awesomeMap),
-        draggedElement: "",
-      };
+      const selectedLayer = state.selectedLayer;
+      console.log("👍");
+      console.log("Hola Layers");
+      console.log(selectedLayer);
+
+      if (selectedLayer || selectedLayer === 0) {
+        var mapLayers = [...state.mapLayers];
+        const modifyMap = insertTile(
+          x,
+          y,
+          tileName,
+          state.mapLayers[selectedLayer]
+        );
+        mapLayers[selectedLayer] = modifyMap;
+        console.log("👍");
+        console.log("Adios Layers");
+        return {
+          ...state,
+          mapLayers: mapLayers,
+          draggedElement: "",
+        };
+      } else {
+        return {
+          ...state,
+          awesomeMap: insertTile(x, y, tileName, state.awesomeMap),
+          draggedElement: "",
+        };
+      }
     case ActionTypes.SELECT_LAYER:
       return { ...state, selectedLayer: action.selectedLayer };
     default:
@@ -67,17 +90,12 @@ const createNewLayer = (x, y) => {
     }
     newLayer[i] = row;
   }
-  console.log("👍");
-  console.log(newLayer);
 
   return newLayer;
 };
 
 const insertTile = (x, y, tileName, map) => {
-  console.log("Inserting");
-  console.table(map);
   var newMap = [...map];
   newMap[y][x] = tileName;
-  console.table(newMap);
   return newMap;
 };

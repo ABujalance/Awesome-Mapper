@@ -8,11 +8,8 @@ const MapLayer = (props) => {
   const selectedLayer = useSelector((state) => state.selectedLayer);
   const layer = layerMap[layerIndex];
 
-  console.log("la capa");
-  console.table(layerMap);
-
   if (selectedLayer === layerIndex) {
-    return <div class="map-layer">{layer.map(renderMapRowLayer)}</div>;
+    return <div className="map-layer">{layer.map(renderMapRowLayer)}</div>;
   } else {
     return <div></div>;
   }

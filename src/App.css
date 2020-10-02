@@ -50,6 +50,10 @@
 
 .tiles-gallery {
   display: flex;
+  padding: 5px;
+}
+.tiles-gallery .drag-tile {
+  padding: 2px;
 }
 
 .tile {
