@@ -5,13 +5,23 @@ import NewMapForm from "./components/NewMapForm";
 
 import AwesomeMap from "./components/Map";
 import TilesGallery from "./components/TilesGallery";
+import LayerSelector from "./components/LayerSelector";
 
-const tileTypes = ["grass.png", "water.png"];
+var tileTypes = [];
 
+const importAll = (r) => {
+  return r.keys();
+};
+
+tileTypes = importAll(
+  require.context("../public/images/", false, /\.(png|jpe?g|svg)$/)
+);
+console.log(tileTypes);
 function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <LayerSelector />
         <AwesomeMap />
         <TilesGallery tileTypes={tileTypes} />
         <NewMapForm />

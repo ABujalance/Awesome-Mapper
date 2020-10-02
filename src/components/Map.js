@@ -1,22 +1,27 @@
 import React from "react";
-import Tile from "./Tile";
 import { useSelector } from "react-redux";
+import MapLayer from "./MapLayer";
+
+import Tile from "../components/Tile";
 
 const AwesomeMap = (props) => {
   const tiles = useSelector((state) => state.awesomeMap);
 
   return (
     <div>
-      <div className="awesome-map">{tiles.map(renderMapRow)}</div>
+      <div className="awesome-map">
+        <div>{tiles.map(renderMapRow)}</div>
+        <MapLayer layerIndex={0} />
+      </div>
     </div>
   );
 };
 
-const renderMapRow = (tileRow, index) => {
+export const renderMapRow = (tileRow, index) => {
   return (
     <tr key={index} index={index}>
       {tileRow.map((tileType, columnIndex) => {
-        return <Tile tileType={tileType} index={columnIndex} />;
+        return <Tile tileType={tileType} index={columnIndex} isBase={true} />;
       })}
     </tr>
   );

@@ -41,6 +41,8 @@
   line-height: 0;
   border-style: solid;
   border-color: black;
+  position: relative;
+  z-index: 1;
 }
 .btn-tile-selection {
   background-size: cover;
@@ -48,4 +50,22 @@
 
 .tiles-gallery {
   display: flex;
+}
+
+.tile {
+  min-height: 32px;
+  min-width: 32px;
+}
+
+.map-layer {
+  line-height: 0;
+  opacity: 20;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  z-index: 2;
+  background: transparent;
 }

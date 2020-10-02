@@ -9,9 +9,12 @@ const Tile = (props) => {
 
   const tileType = props.tileType;
   const index = props.index;
+  const isBase = props.isBase;
   const imgUrl = tileType
     ? process.env.PUBLIC_URL + "/images/" + tileType
-    : process.env.PUBLIC_URL + "/images/empty.png";
+    : isBase
+    ? process.env.PUBLIC_URL + "/images/special/empty.png"
+    : process.env.PUBLIC_URL + "/images/special/transparent.png";
 
   const onDragOver = (event) => {
     event.preventDefault();
@@ -32,6 +35,7 @@ const Tile = (props) => {
   return (
     <td index={index}>
       <div
+        className="tile"
         onDrop={(event) => onDrop(event)}
         onDragOver={(event) => onDragOver(event)}
       >

@@ -6,6 +6,7 @@ import * as serviceWorker from "./serviceWorker";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import mapReducer from "./reducers/mapReducer";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const store = createStore(mapReducer);
 
