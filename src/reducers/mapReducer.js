@@ -22,6 +22,7 @@ export default function mapReducer(state = initialState, action) {
       return {
         ...state,
         awesomeMap: insertTile(x, y, tileName, state.awesomeMap),
+        draggedElement: "",
       };
     default:
       return state;
