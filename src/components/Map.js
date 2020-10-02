@@ -14,9 +14,9 @@ const AwesomeMap = (props) => {
 
 const renderMapRow = (tileRow, index) => {
   return (
-    <tr key={index}>
-      {tileRow.map((tileType) => {
-        return <Tile tileType={tileType} />;
+    <tr key={index} index={index}>
+      {tileRow.map((tileType, columnIndex) => {
+        return <Tile tileType={tileType} index={columnIndex} />;
       })}
     </tr>
   );

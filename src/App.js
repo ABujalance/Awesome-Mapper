@@ -4,37 +4,16 @@ import "./App.css";
 import NewMapForm from "./components/NewMapForm";
 
 import AwesomeMap from "./components/Map";
+import TilesGallery from "./components/TilesGallery";
 
 const tileTypes = ["grass.png", "water.png"];
 
-const startingTiles = [
-  ["grass.png", "grass.png", "grass.png", "grass.png", "grass.png", ""],
-  ["grass.png", "water.png", "water.png", "", "water.png", "water.png"],
-  ["grass.png", "water.png", "grass.png", "grass.png", "grass.png", ""],
-  ["grass.png", "water.png", "water.png", "water.png", "grass.png", ""],
-  ["grass.png", "water.png", "water.png", "water.png", "grass.png", ""],
-  ["", "", "", "", "", ""],
-];
-
 function App() {
-  const clickNewTile = (tileType) => {
-    alert(tileType);
-  };
-
   return (
     <div className="App">
       <header className="App-header">
         <AwesomeMap />
-        <div className="btn-group" aria-label="Tiles">
-          {tileTypes.map((tileName, index) => {
-            var tileType = process.env.PUBLIC_URL + "/images/" + tileName;
-            return (
-              <a onClick={() => clickNewTile(tileName)}>
-                <img src={tileType}></img>
-              </a>
-            );
-          })}
-        </div>
+        <TilesGallery tileTypes={tileTypes} />
         <NewMapForm />
         <p>Welcome to Awesome Mapper!</p>
         This project is being developed by

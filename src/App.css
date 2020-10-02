@@ -45,3 +45,7 @@
 .btn-tile-selection {
   background-size: cover;
 }
+
+.tiles-gallery {
+  display: flex;
+}
