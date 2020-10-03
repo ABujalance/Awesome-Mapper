@@ -44,6 +44,17 @@
   position: relative;
   z-index: 1;
 }
+
+.small-pointer:hover {
+  cursor: url("img/small-draw-pointer.png") 16 16, auto;
+}
+.medium-pointer:hover {
+  cursor: url("img/medium-draw-pointer.png") 16 16, auto;
+}
+.big-pointer:hover {
+  cursor: url("img/big-draw-pointer.png") 16 16, auto;
+}
+
 .btn-tile-selection {
   background-size: cover;
 }

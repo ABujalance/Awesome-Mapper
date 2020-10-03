@@ -6,16 +6,12 @@ const TilesGallery = (props) => {
   const tileTypes = props.tileTypes;
   const dispatch = useDispatch();
 
-  const onDrag = (event, tileName) => {
+  const onClick = (event, tileName) => {
     event.preventDefault();
     dispatch({
       type: Actions.CHANGE_DRAGGED_ELEMENT,
       draggedElement: tileName,
     });
-  };
-
-  const clickNewTile = (tileType) => {
-    alert(tileType);
   };
 
   return (
@@ -25,8 +21,7 @@ const TilesGallery = (props) => {
         return (
           <div
             className="drag-tile"
-            draggable
-            onDrag={(event) => onDrag(event, tileName)}
+            onClick={(event) => onClick(event, tileName)}
           >
             <img src={tileType}></img>
           </div>

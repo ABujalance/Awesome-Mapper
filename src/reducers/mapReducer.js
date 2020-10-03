@@ -14,6 +14,9 @@ const initialState = {
     ],
   ],
   selectedLayer: null,
+  brushSize: 0,
+  xMapSize: 3,
+  yMapSize: 3,
 };
 export default function mapReducer(state = initialState, action) {
   switch (action.type) {
@@ -26,6 +29,8 @@ export default function mapReducer(state = initialState, action) {
         ...state,
         awesomeMap: createNewMap(xSize, ySize),
         mapLayers: newLayers,
+        xMapSize: xSize,
+        yMapSize: ySize,
       };
     case ActionTypes.CHANGE_DRAGGED_ELEMENT:
       return { ...state, draggedElement: action.draggedElement };
@@ -34,35 +39,31 @@ export default function mapReducer(state = initialState, action) {
       const x = action.x;
       const y = action.y;
       const selectedLayer = state.selectedLayer;
-      console.log("👍");
-      console.log("Hola Layers");
-      console.log(selectedLayer);
 
       if (selectedLayer || selectedLayer === 0) {
         var mapLayers = [...state.mapLayers];
-        const modifyMap = insertTile(
+        const modifyMap = insertTiles(
           x,
           y,
           tileName,
-          state.mapLayers[selectedLayer]
+          state.mapLayers[selectedLayer],
+          state
         );
         mapLayers[selectedLayer] = modifyMap;
-        console.log("👍");
-        console.log("Adios Layers");
         return {
           ...state,
           mapLayers: mapLayers,
-          draggedElement: "",
         };
       } else {
         return {
           ...state,
-          awesomeMap: insertTile(x, y, tileName, state.awesomeMap),
-          draggedElement: "",
+          awesomeMap: insertTiles(x, y, tileName, state.awesomeMap, state),
         };
       }
     case ActionTypes.SELECT_LAYER:
       return { ...state, selectedLayer: action.selectedLayer };
+    case ActionTypes.SET_BRUSH_SIZE:
+      return { ...state, brushSize: action.brushSize };
     default:
       return state;
   }
@@ -94,8 +95,44 @@ const createNewLayer = (x, y) => {
   return newLayer;
 };
 
-const insertTile = (x, y, tileName, map) => {
+const insertTiles = (x, y, tileName, map, state) => {
+  const brushSize = state.brushSize;
+  const xMapSize = state.xMapSize;
+  const yMapSize = state.yMapSize;
   var newMap = [...map];
-  newMap[y][x] = tileName;
+  x = Number(x);
+  y = Number(y);
+
+  if (brushSize === 0) {
+    newMap[y][x] = tileName;
+  } else if (brushSize === 1) {
+    newMap[y][x] = tileName;
+    if (y + 1 < yMapSize) {
+      newMap[y + 1][x] = tileName;
+      if (x + 1 < xMapSize) {
+        newMap[y + 1][x + 1] = tileName;
+      }
+    }
+    if (x + 1 < xMapSize) {
+      newMap[y][x + 1] = tileName;
+    }
+  } else if (brushSize === 2) {
+    const extraTiles = 4;
+    for (var i = 0; i < extraTiles; i++) {
+      for (var j = 0; j < extraTiles; j++) {
+        if (checkInsertTile(x + j, y + i, state)) {
+          newMap[y + i][x + j] = tileName;
+        }
+      }
+    }
+  }
+
   return newMap;
+};
+
+const checkInsertTile = (x, y, state) => {
+  if (x < state.xMapSize && y < state.yMapSize) {
+    return true;
+  }
+  return false;
 };

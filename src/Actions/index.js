@@ -3,6 +3,7 @@ const CounterTypes = {
   CHANGE_DRAGGED_ELEMENT: "CHANGE_DRAGGED_ELEMENT",
   PLACE_TILE: "PLACE_TILE",
   SELECT_LAYER: "SELECT_LAYER",
+  SET_BRUSH_SIZE: "SET_BRUSH_SIZE",
 };
 export default {
   ...CounterTypes,

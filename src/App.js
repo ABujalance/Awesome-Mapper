@@ -6,6 +6,8 @@ import NewMapForm from "./components/NewMapForm";
 import AwesomeMap from "./components/Map";
 import TilesGallery from "./components/TilesGallery";
 import LayerSelector from "./components/LayerSelector";
+import SelectedLayerDisplay from "./components/SelectedLayerDisplay";
+import SelectBrushSize from "./components/SelectBrushSize.js";
 
 var tileTypes = [];
 
@@ -21,9 +23,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <SelectedLayerDisplay />
         <LayerSelector />
         <AwesomeMap />
         <TilesGallery tileTypes={tileTypes} />
+        <SelectBrushSize />
         <NewMapForm />
         <p>Welcome to Awesome Mapper!</p>
         This project is being developed by

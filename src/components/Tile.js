@@ -18,8 +18,19 @@ const Tile = (props) => {
 
   const onDragOver = (event) => {
     event.preventDefault();
+    const y = event.target.parentNode.parentNode.parentNode.getAttribute(
+      "index"
+    );
+    const x = event.target.parentNode.parentNode.getAttribute("index");
+    dispatch({
+      type: Actions.PLACE_TILE,
+      x: x,
+      y: y,
+      tileName: draggedElement,
+    });
   };
-  const onDrop = (event) => {
+  const onClick = (event) => {
+    event.preventDefault();
     const y = event.target.parentNode.parentNode.parentNode.getAttribute(
       "index"
     );
@@ -36,7 +47,7 @@ const Tile = (props) => {
     <td index={index}>
       <div
         className="tile"
-        onDrop={(event) => onDrop(event)}
+        onClick={(event) => onClick(event)}
         onDragOver={(event) => onDragOver(event)}
       >
         <img src={imgUrl} />
