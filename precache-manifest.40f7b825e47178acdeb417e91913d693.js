@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7fc99b53253903aad9867dd8cc590e81",
+    "revision": "f650953d7c516e27d548e3d9f61cc125",
     "url": "/Awesome-Mapper/index.html"
   },
   {
-    "revision": "c0511e7ac45a1667b3bd",
+    "revision": "6b1dad8e30062984f63b",
     "url": "/Awesome-Mapper/static/css/2.d9ad5f5c.chunk.css"
   },
   {
-    "revision": "2e69c4d667cfe096823e",
+    "revision": "32c8766aae52cfd2b854",
     "url": "/Awesome-Mapper/static/css/main.b7fc76b4.chunk.css"
   },
   {
-    "revision": "c0511e7ac45a1667b3bd",
-    "url": "/Awesome-Mapper/static/js/2.696a39cd.chunk.js"
+    "revision": "6b1dad8e30062984f63b",
+    "url": "/Awesome-Mapper/static/js/2.c0e4d4b4.chunk.js"
   },
   {
-    "revision": "76ea532d20a99de8e0fb888746b5c671",
-    "url": "/Awesome-Mapper/static/js/2.696a39cd.chunk.js.LICENSE.txt"
+    "revision": "c9af5f88bc01ae24054e4a7e749c86cc",
+    "url": "/Awesome-Mapper/static/js/2.c0e4d4b4.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "2e69c4d667cfe096823e",
-    "url": "/Awesome-Mapper/static/js/main.06433966.chunk.js"
+    "revision": "32c8766aae52cfd2b854",
+    "url": "/Awesome-Mapper/static/js/main.888213e1.chunk.js"
   },
   {
     "revision": "1aa35f0b529e8004a464",
