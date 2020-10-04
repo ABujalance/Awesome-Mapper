@@ -17,16 +17,6 @@ const SelectBrushSize = (props) => {
     <div>
       <p>Brush Size</p>
       <button
-        onClick={(evt) => onClick(evt, 0)}
-        className={
-          selectedSize === 0
-            ? "btn btn-outline-light active"
-            : "btn btn-outline-light"
-        }
-      >
-        Small
-      </button>
-      <button
         onClick={(evt) => onClick(evt, 1)}
         className={
           selectedSize === 1
@@ -34,7 +24,7 @@ const SelectBrushSize = (props) => {
             : "btn btn-outline-light"
         }
       >
-        Medium
+        Small
       </button>
       <button
         onClick={(evt) => onClick(evt, 2)}
@@ -44,7 +34,27 @@ const SelectBrushSize = (props) => {
             : "btn btn-outline-light"
         }
       >
+        Medium
+      </button>
+      <button
+        onClick={(evt) => onClick(evt, 4)}
+        className={
+          selectedSize === 4
+            ? "btn btn-outline-light active"
+            : "btn btn-outline-light"
+        }
+      >
         Big
+      </button>
+      <button
+        onClick={(evt) => onClick(evt, 0)}
+        className={
+          selectedSize === 0
+            ? "btn btn-outline-light active"
+            : "btn btn-outline-light"
+        }
+      >
+        Fill
       </button>
     </div>
   );

@@ -55,6 +55,10 @@
   cursor: url("img/big-draw-pointer.png") 16 16, auto;
 }
 
+.fill-pointer:hover {
+  cursor: url("img/fill-draw-pointer.png") 16 16, auto;
+}
+
 .btn-tile-selection {
   background-size: cover;
 }

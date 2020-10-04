@@ -14,7 +14,7 @@ const initialState = {
     ],
   ],
   selectedLayer: null,
-  brushSize: 0,
+  brushSize: 1,
   xMapSize: 3,
   yMapSize: 3,
 };
@@ -104,22 +104,14 @@ const insertTiles = (x, y, tileName, map, state) => {
   y = Number(y);
 
   if (brushSize === 0) {
-    newMap[y][x] = tileName;
-  } else if (brushSize === 1) {
-    newMap[y][x] = tileName;
-    if (y + 1 < yMapSize) {
-      newMap[y + 1][x] = tileName;
-      if (x + 1 < xMapSize) {
-        newMap[y + 1][x + 1] = tileName;
+    for (var i = 0; i < yMapSize; i++) {
+      for (var j = 0; j < xMapSize; j++) {
+        newMap[i][j] = tileName;
       }
     }
-    if (x + 1 < xMapSize) {
-      newMap[y][x + 1] = tileName;
-    }
-  } else if (brushSize === 2) {
-    const extraTiles = 4;
-    for (var i = 0; i < extraTiles; i++) {
-      for (var j = 0; j < extraTiles; j++) {
+  } else {
+    for (var i = 0; i < brushSize; i++) {
+      for (var j = 0; j < brushSize; j++) {
         if (checkInsertTile(x + j, y + i, state)) {
           newMap[y + i][x + j] = tileName;
         }

@@ -9,12 +9,14 @@ const AwesomeMap = (props) => {
   const brushSize = useSelector((state) => state.brushSize);
 
   var mapClass = "awesome-map ";
-  if (brushSize === 0) {
+  if (brushSize === 1) {
     mapClass = mapClass.concat("small-pointer");
-  } else if (brushSize === 1) {
-    mapClass = mapClass.concat("medium-pointer");
   } else if (brushSize === 2) {
+    mapClass = mapClass.concat("medium-pointer");
+  } else if (brushSize === 4) {
     mapClass = mapClass.concat("big-pointer");
+  } else if (brushSize === 0) {
+    mapClass = mapClass.concat("fill-pointer");
   }
 
   return (
