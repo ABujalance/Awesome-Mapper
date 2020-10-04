@@ -10,6 +10,11 @@ const NewMapForm = (props) => {
 
   const handleNewMapSubmit = (e) => {
     e.preventDefault();
+    if (xTiles * yTiles >= 400) {
+      alert(
+        "When you work with big map sizes, be careful while dragging the brush since it may slow down your system. Instead, try just clicking where you want to draw/erase"
+      );
+    }
 
     dispatch({ type: Actions.CREATE_MAP, xSize: xTiles, ySize: yTiles });
   };

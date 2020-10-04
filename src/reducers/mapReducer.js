@@ -18,7 +18,6 @@ export default function mapReducer(state = initialState, action) {
       const xSize = action.xSize;
       const ySize = action.ySize;
       var newLayers = [];
-      newLayers.push(createNewMap(xSize, ySize));
       return {
         ...state,
         awesomeMap: createNewMap(xSize, ySize),
