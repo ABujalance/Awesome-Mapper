@@ -9,6 +9,7 @@ import LayerSelector from "./components/LayerSelector";
 import SelectedTileDisplay from "./components/SelectedTileDisplay";
 import SelectBrushSize from "./components/SelectBrushSize.js";
 import PrintMap from "./components/PrintMap";
+import { folderImageStructure } from "./utilities/TileLibraryUtilities";
 
 var tileTypes = [];
 
@@ -16,7 +17,8 @@ const importAll = (r) => {
   return r.keys();
 };
 
-tileTypes = importAll(require.context("../public/images/", false));
+tileTypes = importAll(require.context("../public/images/", true));
+const structureFolder = folderImageStructure(tileTypes);
 console.log(require.context("../public/images/", false));
 console.log(tileTypes);
 function App() {
@@ -27,7 +29,7 @@ function App() {
         <LayerSelector />
         <PrintMap />
         <AwesomeMap />
-        <TilesGallery tileTypes={tileTypes} />
+        <TilesGallery tileTypes={tileTypes} structureFolder={structureFolder} />
         <SelectBrushSize />
         <NewMapForm />
         <p>Welcome to Awesome Mapper!</p>
