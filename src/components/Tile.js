@@ -16,7 +16,7 @@ const Tile = (props) => {
     ? process.env.PUBLIC_URL + "/images/special/empty.png"
     : process.env.PUBLIC_URL + "/images/special/transparent.png";
 
-  /*   const onDragOver = (event) => {
+  const onDragOver = (event) => {
     event.preventDefault();
     const y = event.target.parentNode.parentNode.parentNode.getAttribute(
       "index"
@@ -28,7 +28,7 @@ const Tile = (props) => {
       y: y,
       tileName: draggedElement,
     });
-  }; */
+  };
   const onClick = (event) => {
     event.preventDefault();
     const y = event.target.parentNode.parentNode.parentNode.getAttribute(
@@ -48,7 +48,7 @@ const Tile = (props) => {
       <div
         className="tile"
         onClick={(event) => onClick(event)}
-        /* onDragOver={(event) => onDragOver(event)} */
+        onDragOver={(event) => onDragOver(event)}
       >
         <img src={imgUrl} />
       </div>
