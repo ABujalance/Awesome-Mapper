@@ -4,6 +4,7 @@ const CounterTypes = {
   PLACE_TILE: "PLACE_TILE",
   SELECT_LAYER: "SELECT_LAYER",
   SET_BRUSH_SIZE: "SET_BRUSH_SIZE",
+  ADD_LAYER: "ADD_LAYER",
 };
 export default {
   ...CounterTypes,

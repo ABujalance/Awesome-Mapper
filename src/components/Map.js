@@ -7,6 +7,7 @@ import Tile from "../components/Tile";
 const AwesomeMap = (props) => {
   const tiles = useSelector((state) => state.awesomeMap);
   const brushSize = useSelector((state) => state.brushSize);
+  const mapLayers = useSelector((state) => state.mapLayers);
 
   var mapClass = "awesome-map ";
   if (brushSize === 1) {
@@ -23,7 +24,9 @@ const AwesomeMap = (props) => {
     <div>
       <div className={mapClass}>
         <div>{tiles.map(renderMapRow)}</div>
-        <MapLayer layerIndex={0} />
+        {Array.from(Array(mapLayers.length), (el, index) => {
+          return <MapLayer layerIndex={index} />;
+        })}
       </div>
     </div>
   );

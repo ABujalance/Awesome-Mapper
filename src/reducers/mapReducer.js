@@ -6,13 +6,7 @@ const initialState = {
     ["", "", ""],
   ],
   draggedElement: "",
-  mapLayers: [
-    [
-      ["", "", ""],
-      ["", "", ""],
-      ["", "", ""],
-    ],
-  ],
+  mapLayers: [],
   selectedLayer: null,
   brushSize: 1,
   xMapSize: 3,
@@ -24,7 +18,7 @@ export default function mapReducer(state = initialState, action) {
       const xSize = action.xSize;
       const ySize = action.ySize;
       var newLayers = [];
-      newLayers.push(createNewLayer(xSize, ySize));
+      newLayers.push(createNewMap(xSize, ySize));
       return {
         ...state,
         awesomeMap: createNewMap(xSize, ySize),
@@ -40,8 +34,19 @@ export default function mapReducer(state = initialState, action) {
       const y = action.y;
       const selectedLayer = state.selectedLayer;
 
+      console.log(
+        "insertando en la capa ",
+        selectedLayer,
+        " para coordenadas X:",
+        x,
+        " Y:",
+        y
+      );
+
       if (selectedLayer || selectedLayer === 0) {
+        console.log("efectivamente doña, así es");
         var mapLayers = [...state.mapLayers];
+        console.table(mapLayers);
         const modifyMap = insertTiles(
           x,
           y,
@@ -49,7 +54,8 @@ export default function mapReducer(state = initialState, action) {
           state.mapLayers[selectedLayer],
           state
         );
-        mapLayers[selectedLayer] = modifyMap;
+        mapLayers.splice(selectedLayer, 1, modifyMap);
+        console.table(mapLayers);
         return {
           ...state,
           mapLayers: mapLayers,
@@ -64,6 +70,13 @@ export default function mapReducer(state = initialState, action) {
       return { ...state, selectedLayer: action.selectedLayer };
     case ActionTypes.SET_BRUSH_SIZE:
       return { ...state, brushSize: action.brushSize };
+    case ActionTypes.ADD_LAYER:
+      var newMapLayers = [...state.mapLayers];
+      newMapLayers.push(createNewMap(state.xMapSize, state.yMapSize));
+      return {
+        ...state,
+        mapLayers: newMapLayers,
+      };
     default:
       return state;
   }
@@ -80,19 +93,6 @@ const createNewMap = (x, y) => {
   }
 
   return newMap;
-};
-
-const createNewLayer = (x, y) => {
-  var newLayer = new Array(y);
-  for (var i = 0; i < y; i++) {
-    var row = [];
-    for (var j = 0; j < x; j++) {
-      row.push("");
-    }
-    newLayer[i] = row;
-  }
-
-  return newLayer;
 };
 
 const insertTiles = (x, y, tileName, map, state) => {
@@ -113,7 +113,7 @@ const insertTiles = (x, y, tileName, map, state) => {
     for (var i = 0; i < brushSize; i++) {
       for (var j = 0; j < brushSize; j++) {
         if (checkInsertTile(x + j, y + i, state)) {
-          newMap[y + i][x + j] = tileName;
+          newMap[y + i].splice([x + j], 1, tileName);
         }
       }
     }

@@ -8,7 +8,7 @@ const MapLayer = (props) => {
   const selectedLayer = useSelector((state) => state.selectedLayer);
   const layer = layerMap[layerIndex];
 
-  if (selectedLayer === layerIndex) {
+  if (selectedLayer >= layerIndex) {
     return <div className="map-layer">{layer.map(renderMapRowLayer)}</div>;
   } else {
     return <div></div>;
