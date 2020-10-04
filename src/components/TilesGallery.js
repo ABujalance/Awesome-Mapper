@@ -64,6 +64,10 @@ const TilesGallery = (props) => {
           return <div></div>;
         }
       })}
+      <div
+        className="drag-tile eraser"
+        onClick={(event) => onClick(event, "")}
+      ></div>
     </div>
   );
 };

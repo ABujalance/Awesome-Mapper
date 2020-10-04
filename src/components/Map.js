@@ -2,7 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import MapLayer from "./MapLayer";
 
-import Tile from "../components/Tile";
+import Tile from "./Tile";
+import MapGrid from "./MapGrid";
 
 const AwesomeMap = (props) => {
   const tiles = useSelector((state) => state.awesomeMap);
@@ -27,6 +28,7 @@ const AwesomeMap = (props) => {
         {Array.from(Array(mapLayers.length), (el, index) => {
           return <MapLayer layerIndex={index} />;
         })}
+        <MapGrid />
       </div>
     </div>
   );

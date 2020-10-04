@@ -11,6 +11,7 @@ const initialState = {
   brushSize: 1,
   xMapSize: 3,
   yMapSize: 3,
+  showGrid: true,
 };
 export default function mapReducer(state = initialState, action) {
   switch (action.type) {
@@ -66,6 +67,18 @@ export default function mapReducer(state = initialState, action) {
       return {
         ...state,
         mapLayers: newMapLayers,
+      };
+    case ActionTypes.TOGGLE_GRID:
+      return { ...state, showGrid: !state.showGrid };
+    case ActionTypes.LOAD_MAP:
+      const newState = action.newState;
+
+      return {
+        ...state,
+        xMapSize: newState.xMapSize,
+        yMapSize: newState.yMapSize,
+        mapLayers: newState.mapLayers,
+        awesomeMap: newState.awesomeMap,
       };
     default:
       return state;

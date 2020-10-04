@@ -5,6 +5,8 @@ const CounterTypes = {
   SELECT_LAYER: "SELECT_LAYER",
   SET_BRUSH_SIZE: "SET_BRUSH_SIZE",
   ADD_LAYER: "ADD_LAYER",
+  TOGGLE_GRID: "TOGGLE_GRID",
+  LOAD_MAP: "LOAD_MAP",
 };
 export default {
   ...CounterTypes,
