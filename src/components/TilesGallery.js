@@ -15,18 +15,24 @@ const TilesGallery = (props) => {
   };
 
   return (
-    <div className="tiles-gallery" aria-label="Tiles">
-      {tileTypes.map((tileName) => {
-        var tileType = process.env.PUBLIC_URL + "/images/" + tileName;
-        return (
-          <div
-            className="drag-tile"
-            onClick={(event) => onClick(event, tileName)}
-          >
-            <img src={tileType}></img>
-          </div>
-        );
-      })}
+    <div>
+      <div className="tiles-gallery" aria-label="Tiles">
+        {tileTypes.map((tileName) => {
+          var tileType = process.env.PUBLIC_URL + "/images/" + tileName;
+          return (
+            <div
+              className="drag-tile"
+              onClick={(event) => onClick(event, tileName)}
+            >
+              <img src={tileType}></img>
+            </div>
+          );
+        })}
+      </div>
+      <div
+        className="drag-tile eraser"
+        onClick={(event) => onClick(event, "")}
+      ></div>
     </div>
   );
 };

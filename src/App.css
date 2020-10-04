@@ -59,6 +59,11 @@
   cursor: url("img/fill-draw-pointer.png") 16 16, auto;
 }
 
+.eraser {
+  background-image: url("img/eraser-64.png");
+  height: 64px;
+  width: 64px;
+}
 .btn-tile-selection {
   background-size: cover;
 }
