@@ -21,7 +21,7 @@ const AwesomeMap = (props) => {
   }
 
   return (
-    <div>
+    <div id="capture">
       <div className={mapClass}>
         <div>{tiles.map(renderMapRow)}</div>
         {Array.from(Array(mapLayers.length), (el, index) => {

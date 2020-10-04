@@ -8,6 +8,7 @@ import TilesGallery from "./components/TilesGallery";
 import LayerSelector from "./components/LayerSelector";
 import SelectedTileDisplay from "./components/SelectedTileDisplay";
 import SelectBrushSize from "./components/SelectBrushSize.js";
+import PrintMap from "./components/PrintMap";
 
 var tileTypes = [];
 
@@ -15,9 +16,8 @@ const importAll = (r) => {
   return r.keys();
 };
 
-tileTypes = importAll(
-  require.context("../public/images/", false, /\.(png|jpe?g|svg)$/)
-);
+tileTypes = importAll(require.context("../public/images/", false));
+console.log(require.context("../public/images/", false));
 console.log(tileTypes);
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
       <header className="App-header">
         <SelectedTileDisplay />
         <LayerSelector />
+        <PrintMap />
         <AwesomeMap />
         <TilesGallery tileTypes={tileTypes} />
         <SelectBrushSize />

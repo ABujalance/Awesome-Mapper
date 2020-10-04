@@ -24,6 +24,7 @@ export default function mapReducer(state = initialState, action) {
         mapLayers: newLayers,
         xMapSize: xSize,
         yMapSize: ySize,
+        selectedLayer: null,
       };
     case ActionTypes.CHANGE_DRAGGED_ELEMENT:
       return { ...state, draggedElement: action.draggedElement };
@@ -33,19 +34,9 @@ export default function mapReducer(state = initialState, action) {
       const y = action.y;
       const selectedLayer = state.selectedLayer;
 
-      console.log(
-        "insertando en la capa ",
-        selectedLayer,
-        " para coordenadas X:",
-        x,
-        " Y:",
-        y
-      );
-
       if (selectedLayer || selectedLayer === 0) {
-        console.log("efectivamente doña, así es");
         var mapLayers = [...state.mapLayers];
-        console.table(mapLayers);
+
         const modifyMap = insertTiles(
           x,
           y,
@@ -54,7 +45,7 @@ export default function mapReducer(state = initialState, action) {
           state
         );
         mapLayers.splice(selectedLayer, 1, modifyMap);
-        console.table(mapLayers);
+
         return {
           ...state,
           mapLayers: mapLayers,
