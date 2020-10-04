@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Awesome-Mapper/static/css/main.b7fc76b4.chunk.css",
-    "main.js": "/Awesome-Mapper/static/js/main.e6e6a480.chunk.js",
-    "main.js.map": "/Awesome-Mapper/static/js/main.e6e6a480.chunk.js.map",
+    "main.js": "/Awesome-Mapper/static/js/main.6b3cbd18.chunk.js",
+    "main.js.map": "/Awesome-Mapper/static/js/main.6b3cbd18.chunk.js.map",
     "runtime-main.js": "/Awesome-Mapper/static/js/runtime-main.aa9aac9e.js",
     "runtime-main.js.map": "/Awesome-Mapper/static/js/runtime-main.aa9aac9e.js.map",
     "static/css/2.d9ad5f5c.chunk.css": "/Awesome-Mapper/static/css/2.d9ad5f5c.chunk.css",
     "static/js/2.b2013500.chunk.js": "/Awesome-Mapper/static/js/2.b2013500.chunk.js",
     "static/js/2.b2013500.chunk.js.map": "/Awesome-Mapper/static/js/2.b2013500.chunk.js.map",
     "index.html": "/Awesome-Mapper/index.html",
-    "precache-manifest.c2afb0f3617562a5bcba22928ef90ef5.js": "/Awesome-Mapper/precache-manifest.c2afb0f3617562a5bcba22928ef90ef5.js",
+    "precache-manifest.e321c84ef1d842f1109acf2640cdfa73.js": "/Awesome-Mapper/precache-manifest.e321c84ef1d842f1109acf2640cdfa73.js",
     "service-worker.js": "/Awesome-Mapper/service-worker.js",
     "static/css/2.d9ad5f5c.chunk.css.map": "/Awesome-Mapper/static/css/2.d9ad5f5c.chunk.css.map",
     "static/css/main.b7fc76b4.chunk.css.map": "/Awesome-Mapper/static/css/main.b7fc76b4.chunk.css.map",
@@ -21,6 +21,6 @@
     "static/css/2.d9ad5f5c.chunk.css",
     "static/js/2.b2013500.chunk.js",
     "static/css/main.b7fc76b4.chunk.css",
-    "static/js/main.e6e6a480.chunk.js"
+    "static/js/main.6b3cbd18.chunk.js"
   ]
 }
