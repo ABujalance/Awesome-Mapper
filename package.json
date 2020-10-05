@@ -2,7 +2,7 @@
   "name": "awesome-mapper",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://abujalance.github.io/Awesome-Mapper/",
+  "homepage": "https://tilemapper.abujalance.com/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
