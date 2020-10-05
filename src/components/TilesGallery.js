@@ -67,7 +67,7 @@ const TilesGallery = (props) => {
                           className="drag-tile"
                           onClick={(event) => onClick(event, tileType)}
                         >
-                          <img src={tileType}></img>
+                          <img className="tile-32" src={tileType}></img>
                         </div>
                       );
                     })}
@@ -97,7 +97,7 @@ const TilesGallery = (props) => {
                   className="drag-tile"
                   onClick={(event) => onClick(event, tileName)}
                 >
-                  <img src={tileName}></img>
+                  <img className="tile-32" src={tileName}></img>
                 </div>
               );
             })}

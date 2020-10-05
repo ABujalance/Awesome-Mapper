@@ -6,7 +6,7 @@ const SelectedTileDisplay = (props) => {
   return (
     <div>
       Selected Tile &nbsp;
-      <img src={selectedTile} />
+      <img className="tile-32" src={selectedTile} />
     </div>
   );
 };

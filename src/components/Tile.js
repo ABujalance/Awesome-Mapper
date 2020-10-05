@@ -50,7 +50,7 @@ const Tile = (props) => {
         onClick={(event) => onClick(event)}
         onDragOver={(event) => onDragOver(event)}
       >
-        <img src={imgUrl} />
+        <img className="tile-32" src={imgUrl} />
       </div>
     </td>
   );

@@ -93,3 +93,8 @@
   z-index: 2;
   background: transparent;
 }
+
+.tile-32 {
+  width: 32px;
+  height: 32px;
+}
