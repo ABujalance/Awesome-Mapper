@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Actions from "../Actions";
 
 const NewMapForm = (props) => {
   const dispatch = useDispatch();
 
-  const [xTiles, setxTiles] = useState(1);
-  const [yTiles, setyTiles] = useState(1);
+  const xMapSize = useSelector((state) => state.xMapSize);
+  const yMapSize = useSelector((state) => state.yMapSize);
+  const [xTiles, setxTiles] = useState(xMapSize);
+  const [yTiles, setyTiles] = useState(yMapSize);
 
   const handleNewMapSubmit = (e) => {
     e.preventDefault();
