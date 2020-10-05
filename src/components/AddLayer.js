@@ -12,7 +12,7 @@ const AddLayer = (props) => {
   };
 
   return (
-    <button onClick={(evt) => onClick(evt)} className="btn btn-light">
+    <button onClick={(evt) => onClick(evt)} className="btn btn-dark">
       +
     </button>
   );

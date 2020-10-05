@@ -13,19 +13,116 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
+.App-body {
+  background-color: #ffffcc;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-size: calc(2px + 2vmin);
+  color: black;
+  width: 100%;
+}
+.App-controls {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: row;
+}
+
+.App-left-controls {
+  flex-basis: 10%;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #000;
+  align-items: center;
+}
+.App-map {
+  border: 2px solid #000;
+  display: flex;
+  flex-basis: 80%;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.App-right-controls {
+  border: 2px solid #000;
+  flex-basis: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.App-tiles-selector {
+  border: 2px solid #000;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.tiles-gallery {
+  display: flex;
+  padding: 5px;
+}
+
+.brush-selector {
+  display: flex;
+}
+
+.aditional-brushes {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.toggle-grid {
+  margin: 8px;
+  display: inline-block;
+}
+
+input[type="checkbox"] {
+  vertical-align: middle;
+  position: relative;
+  bottom: 1px;
+  margin: 8px;
+}
+
+.save-load-map-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+label.upload-map input[type="file"] {
+  position: absolute;
+  top: -1000px;
+}
+
+.upload-map {
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  padding: 2px 5px;
+  margin: 2px;
+  background: #ddd;
+  display: inline-block;
+}
+
+.upload-map:hover {
+  background: #ccc;
+}
+.upload-map:active {
+  background: #ccf;
+}
+.upload-map :invalid + span {
+  color: #a44;
+}
+.upload-map :valid + span {
+  color: #4a4;
+}
+
+.tiles-gallery .drag-tile {
+  padding: 2px;
 }
 
 .App-link {
-  color: #61dafb;
+  color: dark-blue;
 }
 
 @keyframes App-logo-spin {
@@ -66,14 +163,6 @@
 }
 .btn-tile-selection {
   background-size: cover;
-}
-
-.tiles-gallery {
-  display: flex;
-  padding: 5px;
-}
-.tiles-gallery .drag-tile {
-  padding: 2px;
 }
 
 .tile {

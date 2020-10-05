@@ -112,10 +112,6 @@ const TilesGallery = (props) => {
         accept=".png"
         multiple
       />
-      <div
-        className="drag-tile eraser"
-        onClick={(event) => onClick(event, "")}
-      ></div>
     </div>
   );
 };

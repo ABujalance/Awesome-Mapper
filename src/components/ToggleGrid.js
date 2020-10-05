@@ -6,21 +6,24 @@ const ToggleGrid = (props) => {
   const dispatch = useDispatch();
   const showGrid = useSelector((state) => state.showGrid);
 
-  const onClick = () => {
+  const handleInputChange = () => {
     dispatch({
       type: Actions.TOGGLE_GRID,
     });
   };
 
   return (
-    <button
-      onClick={onClick}
-      className={
-        showGrid ? "btn btn-outline-light active" : "btn btn-outline-light"
-      }
-    >
-      Toggle Grid
-    </button>
+    <div className="toggle-grid">
+      <label>
+        <span>Show Grid</span>
+        <input
+          name="showGrid"
+          type="checkbox"
+          checked={showGrid}
+          onChange={() => handleInputChange()}
+        />
+      </label>
+    </div>
   );
 };
 

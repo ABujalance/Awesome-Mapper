@@ -24,17 +24,29 @@ console.log(require.context("../public/images/", false));
 console.log(tileTypes);
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <SelectedTileDisplay />
-        <LayerSelector />
-        <ToggleGrid />
-        <SaveLoadMap />
-        <PrintMap />
-        <AwesomeMap />
-        <TilesGallery tileTypes={tileTypes} structureFolder={structureFolder} />
-        <SelectBrushSize />
-        <NewMapForm />
+    <div>
+      <header></header>
+      <body className="App-body">
+        <div className="App-controls">
+          <div className="App-left-controls">
+            <SelectBrushSize />
+            <ToggleGrid />
+          </div>
+          <div className="App-map">
+            <LayerSelector />
+            <AwesomeMap />
+            <SelectedTileDisplay />
+            <TilesGallery
+              tileTypes={tileTypes}
+              structureFolder={structureFolder}
+            />
+          </div>
+          <div className="App-right-controls">
+            <SaveLoadMap />
+            <PrintMap />
+            <NewMapForm />
+          </div>
+        </div>
         <p>Welcome to Awesome Mapper!</p>
         This project is being developed by
         <a
@@ -45,7 +57,7 @@ function App() {
         >
           Abujalance
         </a>
-      </header>
+      </body>
     </div>
   );
 }

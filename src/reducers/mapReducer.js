@@ -1,16 +1,23 @@
 import ActionTypes from "../Actions";
 const initialState = {
   awesomeMap: [
-    ["", "", ""],
-    ["", "", ""],
-    ["", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
   ],
   draggedElement: "",
   mapLayers: [],
   selectedLayer: null,
   brushSize: 1,
-  xMapSize: 3,
-  yMapSize: 3,
+  xMapSize: 10,
+  yMapSize: 10,
   showGrid: true,
 };
 export default function mapReducer(state = initialState, action) {

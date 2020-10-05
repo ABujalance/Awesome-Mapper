@@ -33,18 +33,20 @@ const SaveLoadMap = (props) => {
   }
 
   return (
-    <div>
+    <div className="save-load-map-buttons">
       <button onClick={() => onClickSave()} className="btn btn-light">
         Save Map
       </button>
-      <h2>Load Map</h2>
-      <input
-        id="loadMap"
-        type="file"
-        name="file"
-        onChange={(evt) => onChangeHandler(evt)}
-        accept=".txt"
-      />
+      <label class="upload-map">
+        <input
+          id="loadMap"
+          type="file"
+          name="file"
+          onChange={(evt) => onChangeHandler(evt)}
+          accept=".txt"
+        />
+        <span>Load Map</span>
+      </label>
     </div>
   );
 };

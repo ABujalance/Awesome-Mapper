@@ -21,8 +21,8 @@ const LayerSelector = (props) => {
         onClick={(evt) => onClick(evt)}
         className={
           !selectedLayer && selectedLayer != 0
-            ? "btn btn-outline-light active"
-            : "btn btn-outline-light"
+            ? "btn btn-outline-dark active"
+            : "btn btn-outline-dark"
         }
       >
         Base Layer
@@ -33,8 +33,8 @@ const LayerSelector = (props) => {
             onClick={(evt) => onClick(evt, index)}
             className={
               selectedLayer === index
-                ? "btn btn-outline-light active"
-                : "btn btn-outline-light"
+                ? "btn btn-outline-dark active"
+                : "btn btn-outline-dark"
             }
           >
             Layer {index + 1}
