@@ -2,14 +2,11 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const SelectedTileDisplay = (props) => {
-  const selectedLayer = useSelector((state) => state.draggedElement);
-  const imgUrl = selectedLayer
-    ? process.env.PUBLIC_URL + "/images/" + selectedLayer
-    : process.env.PUBLIC_URL + "/images/special/empty.png";
+  const selectedTile = useSelector((state) => state.draggedElement);
   return (
     <div>
       Selected Tile &nbsp;
-      <img src={imgUrl} />
+      <img src={selectedTile} />
     </div>
   );
 };

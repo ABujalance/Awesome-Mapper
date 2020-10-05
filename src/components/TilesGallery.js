@@ -8,6 +8,7 @@ const TilesGallery = (props) => {
   const dispatch = useDispatch();
   const structureFolder = props.structureFolder;
   const [openFolder, setOpenFolder] = useState("");
+  const [customTiles, setCustomTiles] = useState([]);
   const toggle = (folder) => {
     if (openFolder === folder) {
       setOpenFolder("");
@@ -23,6 +24,21 @@ const TilesGallery = (props) => {
       draggedElement: tileName,
     });
   };
+
+  async function onChangeHandler(event) {
+    var newCustomImages = [];
+    const files = event.target.files;
+    for (var i = 0; i < files.length; i++) {
+      const file = event.target.files[i];
+      var objectURL = URL.createObjectURL(file);
+      newCustomImages.push(objectURL);
+    }
+    alert(
+      "Keep in mind that imported files will not be saved correctly with the map. When you load a previous map, you must reimport and redraw custom tiles"
+    );
+    setCustomTiles(newCustomImages);
+    event.target.value = null;
+  }
 
   return (
     <div>
@@ -49,7 +65,7 @@ const TilesGallery = (props) => {
                       return (
                         <div
                           className="drag-tile"
-                          onClick={(event) => onClick(event, tileName)}
+                          onClick={(event) => onClick(event, tileType)}
                         >
                           <img src={tileType}></img>
                         </div>
@@ -64,6 +80,38 @@ const TilesGallery = (props) => {
           return <div></div>;
         }
       })}
+      <Button
+        color="light"
+        onClick={() => toggle("Custom_Uploaded_Tiles")}
+        style={{ marginBottom: "1rem" }}
+      >
+        Custom Tiles
+      </Button>
+      <Collapse isOpen={openFolder === "Custom_Uploaded_Tiles"}>
+        <Card className="bg-dark">
+          <CardBody className="tiles-gallery">
+            {customTiles.map((tileName) => {
+              console.log(tileName);
+              return (
+                <div
+                  className="drag-tile"
+                  onClick={(event) => onClick(event, tileName)}
+                >
+                  <img src={tileName}></img>
+                </div>
+              );
+            })}
+          </CardBody>
+        </Card>
+      </Collapse>
+      <input
+        id="loadMap"
+        type="file"
+        name="file"
+        onChange={(evt) => onChangeHandler(evt)}
+        accept=".png"
+        multiple
+      />
       <div
         className="drag-tile eraser"
         onClick={(event) => onClick(event, "")}

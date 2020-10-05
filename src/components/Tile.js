@@ -11,7 +11,7 @@ const Tile = (props) => {
   const index = props.index;
   const isBase = props.isBase;
   const imgUrl = tileType
-    ? process.env.PUBLIC_URL + "/images/" + tileType
+    ? tileType
     : isBase
     ? process.env.PUBLIC_URL + "/images/special/empty.png"
     : process.env.PUBLIC_URL + "/images/special/transparent.png";

@@ -11,7 +11,7 @@ import SelectBrushSize from "./components/SelectBrushSize.js";
 import PrintMap from "./components/PrintMap";
 import { folderImageStructure } from "./utilities/TileLibraryUtilities";
 import ToggleGrid from "./components/ToggleGrid";
-import SaveFile from "./components/SaveFile";
+import SaveLoadMap from "./components/SaveLoadMap";
 var tileTypes = [];
 
 const importAll = (r) => {
@@ -29,7 +29,7 @@ function App() {
         <SelectedTileDisplay />
         <LayerSelector />
         <ToggleGrid />
-        <SaveFile />
+        <SaveLoadMap />
         <PrintMap />
         <AwesomeMap />
         <TilesGallery tileTypes={tileTypes} structureFolder={structureFolder} />

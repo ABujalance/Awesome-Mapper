@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Actions from "../Actions";
 
-const SaveFile = (props) => {
+const SaveLoadMap = (props) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const onClickSave = () => {
@@ -18,6 +18,7 @@ const SaveFile = (props) => {
 
   async function onChangeHandler(event) {
     const file = event.target.files[0];
+    event.target.value = null;
     var newState = [];
     try {
       newState = JSON.parse(await file.text());
@@ -37,9 +38,15 @@ const SaveFile = (props) => {
         Save Map
       </button>
       <h2>Load Map</h2>
-      <input type="file" name="file" onChange={(evt) => onChangeHandler(evt)} />
+      <input
+        id="loadMap"
+        type="file"
+        name="file"
+        onChange={(evt) => onChangeHandler(evt)}
+        accept=".txt"
+      />
     </div>
   );
 };
 
-export default SaveFile;
+export default SaveLoadMap;

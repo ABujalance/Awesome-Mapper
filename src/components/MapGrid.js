@@ -20,7 +20,7 @@ export const renderMapRowLayer = (tileRow, index) => {
       {tileRow.map((tileType, columnIndex) => {
         return (
           <Tile
-            tileType="./special/grid.png"
+            tileType={process.env.PUBLIC_URL + "/images/" + "/special/grid.png"}
             index={columnIndex}
             isBase={false}
           />
