@@ -36,10 +36,7 @@ function App() {
             <LayerSelector />
             <AwesomeMap />
             <SelectedTileDisplay />
-            <TilesGallery
-              tileTypes={tileTypes}
-              structureFolder={structureFolder}
-            />
+            <TilesGallery />
           </div>
           <div className="App-right-controls">
             <SaveLoadMap />
@@ -47,16 +44,6 @@ function App() {
             <NewMapForm />
           </div>
         </div>
-        <p>Welcome to Awesome Mapper!</p>
-        This project is being developed by
-        <a
-          className="App-link"
-          href="https://abujalance.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Abujalance
-        </a>
       </body>
     </div>
   );
