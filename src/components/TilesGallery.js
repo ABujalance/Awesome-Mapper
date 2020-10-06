@@ -34,9 +34,6 @@ const TilesGallery = (props) => {
       var objectURL = URL.createObjectURL(file);
       newCustomImages.push(objectURL);
     }
-    alert(
-      "Keep in mind that imported files will not be saved correctly with the map. When you load a previous map, you must reimport and redraw custom tiles"
-    );
     setCustomTiles(newCustomImages);
     event.target.value = null;
   }
@@ -98,7 +95,7 @@ const TilesGallery = (props) => {
                   className="drag-tile"
                   onClick={(event) => onClick(event, tileName)}
                 >
-                  <img className="tile-32" src={tileName}></img>
+                  <img src={tileName}></img>
                 </div>
               );
             })}

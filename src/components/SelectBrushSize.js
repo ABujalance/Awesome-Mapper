@@ -6,6 +6,7 @@ const SelectBrushSize = (props) => {
   const dispatch = useDispatch();
   const selectedSize = useSelector((state) => state.brushSize);
   const selectedTile = useSelector((state) => state.draggedElement);
+  const eraseMode = useSelector((state) => state.eraseMode);
 
   const onClick = (evt, size) => {
     dispatch({
@@ -16,8 +17,8 @@ const SelectBrushSize = (props) => {
 
   const eraserBrush = () => {
     dispatch({
-      type: Actions.CHANGE_DRAGGED_ELEMENT,
-      draggedElement: "",
+      type: Actions.TOGGLE_ERASE_MODE,
+      eraseMode: !eraseMode,
     });
   };
 
@@ -85,7 +86,7 @@ const SelectBrushSize = (props) => {
         <button
           onClick={(evt) => onClick(evt, 0)}
           className={
-            selectedTile === ""
+            eraseMode
               ? "btn btn-outline-light btn-link active"
               : "btn btn-outline-light"
           }

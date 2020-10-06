@@ -27,7 +27,7 @@ const LayerSelector = (props) => {
       >
         Base Layer
       </button>
-      {Array.from(Array(mapLayers.length), (el, index) => {
+      {Array.from(Array(mapLayers), (el, index) => {
         return (
           <button
             onClick={(evt) => onClick(evt, index)}

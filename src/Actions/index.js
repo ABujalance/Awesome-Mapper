@@ -7,6 +7,7 @@ const CounterTypes = {
   ADD_LAYER: "ADD_LAYER",
   TOGGLE_GRID: "TOGGLE_GRID",
   LOAD_MAP: "LOAD_MAP",
+  TOGGLE_ERASE_MODE: "TOGGLE_ERASE_MODE",
 };
 export default {
   ...CounterTypes,

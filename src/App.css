@@ -73,6 +73,10 @@
   display: flex;
 }
 
+.grid {
+  z-index: 9999;
+}
+
 .toggle-grid {
   margin: 8px;
   display: inline-block;
@@ -123,6 +127,26 @@ label.upload-map input[type="file"] {
 
 .App-link {
   color: dark-blue;
+}
+
+.map-canvas-container {
+  position: relative;
+  width: 100vh;
+  height: 55vh;
+  overflow: auto;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.map-canvas {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border: 4px solid;
 }
 
 @keyframes App-logo-spin {
