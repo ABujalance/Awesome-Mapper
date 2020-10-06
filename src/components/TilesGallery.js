@@ -28,6 +28,7 @@ const TilesGallery = (props) => {
   async function onChangeHandler(event) {
     var newCustomImages = [];
     const files = event.target.files;
+    console.log(files);
     for (var i = 0; i < files.length; i++) {
       const file = event.target.files[i];
       var objectURL = URL.createObjectURL(file);

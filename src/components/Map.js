@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useSelector } from "react-redux";
 import MapLayer from "./MapLayer";
 
@@ -9,6 +9,12 @@ const AwesomeMap = (props) => {
   const tiles = useSelector((state) => state.awesomeMap);
   const brushSize = useSelector((state) => state.brushSize);
   const mapLayers = useSelector((state) => state.mapLayers);
+  const xMapSize = useSelector((state) => state.xMapSize);
+  const yMapSize = useSelector((state) => state.yMapSize);
+  const coolMap = useSelector((state) => state.coolMap);
+  const draggedElement = useSelector((state) => state.draggedElement);
+
+  const canvasRef = useRef(null);
 
   var mapClass = "awesome-map ";
   if (brushSize === 1) {
@@ -21,20 +27,69 @@ const AwesomeMap = (props) => {
     mapClass = mapClass.concat("fill-pointer");
   }
 
+  const onClickCanvas = (evt) => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    const rect = canvas.getBoundingClientRect();
+    const x = roundNumber(evt.clientX - rect.left);
+    const y = roundNumber(evt.clientY - rect.top);
+    console.log("x: " + x + " y: " + y);
+    var imageToPrint = new Image();
+    imageToPrint.src = draggedElement;
+    imageToPrint.onload = () => {
+      ctx.drawImage(imageToPrint, x, y);
+    };
+  };
+
+  const onMouseDown = () => {
+    const canvas = canvasRef.current;
+    canvas.addEventListener("mousemove", onMouseMove);
+  };
+
+  const onMouseMove = (evt) => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    const rect = canvas.getBoundingClientRect();
+    const x = roundNumber(evt.clientX - rect.left);
+    const y = roundNumber(evt.clientY - rect.top);
+    console.log("x: " + x + " y: " + y);
+    var imageToPrint = new Image();
+    imageToPrint.src = draggedElement;
+    imageToPrint.onload = () => {
+      ctx.drawImage(imageToPrint, x, y);
+    };
+  };
+
+  const onMouseUp = () => {
+    const canvas = canvasRef.current;
+    canvas.removeEventListener("mousemove", onMouseMove);
+  };
+
+  const roundNumber = (coordinate) => {
+    const simpleBaseCoordinate = coordinate / 32;
+    const floorSimpleBaseCoordinate = Math.floor(simpleBaseCoordinate);
+    return floorSimpleBaseCoordinate * 32;
+  };
+
   return (
     <div id="capture">
       <div className={mapClass}>
-        <div>{tiles.map(renderMapRow)}</div>
-        {Array.from(Array(mapLayers.length), (el, index) => {
-          return <MapLayer layerIndex={index} />;
-        })}
-        <MapGrid />
+        <canvas
+          onMouseDown={(evt) => onMouseDown(evt)}
+          onMouseUp={(evt) => onMouseUp(evt)}
+          onClick={(evt) => onClickCanvas(evt)}
+          ref={canvasRef}
+          id="myCanvas"
+          width={xMapSize * 32}
+          height={yMapSize * 32}
+          style={{ border: "1px solid" }}
+        />
       </div>
     </div>
   );
 };
 
-export const renderMapRow = (tileRow, index) => {
+const renderMapRow = (tileRow, index) => {
   return (
     <tr key={index} index={index}>
       {tileRow.map((tileType, columnIndex) => {

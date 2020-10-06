@@ -165,11 +165,6 @@ label.upload-map input[type="file"] {
   background-size: cover;
 }
 
-.tile {
-  min-height: 32px;
-  min-width: 32px;
-}
-
 .map-layer {
   line-height: 0;
   opacity: 20;
