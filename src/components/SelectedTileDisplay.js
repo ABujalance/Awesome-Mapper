@@ -9,11 +9,7 @@ const SelectedTileDisplay = (props) => {
   return (
     <div>
       Selected Tile &nbsp;
-      <img
-        style={{ border: "2px solid black" }}
-        className="tile-32"
-        src={selectedTile}
-      />
+      <img style={{ border: "2px solid black" }} src={selectedTile} />
     </div>
   );
 };

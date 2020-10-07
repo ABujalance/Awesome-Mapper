@@ -11,6 +11,8 @@ const MapLayer = (props) => {
   const eraseMode = useSelector((state) => state.eraseMode);
   const selectedLayer = useSelector((state) => state.selectedLayer);
 
+  const mapBase = useSelector((state) => state.mapBase);
+
   const [mouseDown, setMouseDown] = useState(false);
   const [currentX, setCurrentX] = useState(null);
   const [currentY, setCurrentY] = useState(null);
@@ -28,6 +30,8 @@ const MapLayer = (props) => {
 
   const onMouseLeave = () => {
     setMouseDown(false);
+    setCurrentX(null);
+    setCurrentY(null);
   };
 
   const onMouseMove = (evt) => {
@@ -42,6 +46,8 @@ const MapLayer = (props) => {
 
   const onMouseUp = () => {
     setMouseDown(false);
+    setCurrentX(null);
+    setCurrentY(null);
   };
 
   const handleKeyDown = (evt) => {
@@ -63,9 +69,9 @@ const MapLayer = (props) => {
   };
 
   const roundNumber = (coordinate) => {
-    const simpleBaseCoordinate = coordinate / 32;
+    const simpleBaseCoordinate = coordinate / mapBase;
     const floorSimpleBaseCoordinate = Math.floor(simpleBaseCoordinate);
-    return floorSimpleBaseCoordinate * 32;
+    return floorSimpleBaseCoordinate * mapBase;
   };
 
   const addTile = (evt) => {
@@ -85,8 +91,8 @@ const MapLayer = (props) => {
         } else {
           for (var i = 0; i < brushSize; i++) {
             for (var j = 0; j < brushSize; j++) {
-              ctx.clearRect(x + i * 32, y + j * 32, 32, 32);
-              ctx.drawImage(imageToPrint, x + i * 32, y + j * 32);
+              ctx.clearRect(x + i * mapBase, y + j * mapBase, mapBase, mapBase);
+              ctx.drawImage(imageToPrint, x + i * mapBase, y + j * mapBase);
             }
           }
         }
@@ -105,7 +111,7 @@ const MapLayer = (props) => {
     if (x != currentX || y != currentY) {
       for (var i = 0; i < brushSize; i++) {
         for (var j = 0; j < brushSize; j++) {
-          ctx.clearRect(x + i * 32, y + j * 32, 32, 32);
+          ctx.clearRect(x + i * mapBase, y + j * mapBase, mapBase, mapBase);
         }
       }
       setCurrentX(x);
@@ -125,8 +131,8 @@ const MapLayer = (props) => {
         ref={canvasRef}
         tabIndex="1000"
         id="myCanvas"
-        width={xMapSize * 32}
-        height={yMapSize * 32}
+        width={xMapSize * mapBase}
+        height={yMapSize * mapBase}
       />
     );
   } else {

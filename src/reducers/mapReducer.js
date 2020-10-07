@@ -8,12 +8,14 @@ const initialState = {
   yMapSize: 10,
   showGrid: false,
   eraseMode: false,
+  mapBase: 32,
 };
 export default function mapReducer(state = initialState, action) {
   switch (action.type) {
     case ActionTypes.CREATE_MAP:
       const xSize = action.xSize;
       const ySize = action.ySize;
+      const newMapBase = action.mapBase;
       var newLayers = 0;
       return {
         ...state,
@@ -21,6 +23,7 @@ export default function mapReducer(state = initialState, action) {
         xMapSize: xSize,
         yMapSize: ySize,
         selectedLayer: null,
+        mapBase: newMapBase,
       };
     case ActionTypes.CHANGE_DRAGGED_ELEMENT:
       return { ...state, draggedElement: action.draggedElement };

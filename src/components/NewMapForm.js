@@ -7,13 +7,20 @@ const NewMapForm = (props) => {
 
   const xMapSize = useSelector((state) => state.xMapSize);
   const yMapSize = useSelector((state) => state.yMapSize);
+  const mapBase = useSelector((state) => state.mapBase);
   const [xTiles, setxTiles] = useState(xMapSize);
   const [yTiles, setyTiles] = useState(yMapSize);
+  const [formMapBase, setFormMapBase] = useState(mapBase);
 
   const handleNewMapSubmit = (e) => {
     e.preventDefault();
-
-    dispatch({ type: Actions.CREATE_MAP, xSize: xTiles, ySize: yTiles });
+    console.log(formMapBase);
+    dispatch({
+      type: Actions.CREATE_MAP,
+      xSize: xTiles,
+      ySize: yTiles,
+      mapBase: formMapBase,
+    });
   };
 
   return (
@@ -34,6 +41,15 @@ const NewMapForm = (props) => {
           onChange={(e) => setyTiles(e.target.value)}
           type="number"
           name="yTiles"
+          min="1"
+        />
+        <br />
+        <label>Pixels per Tile </label>
+        <input
+          value={formMapBase}
+          onChange={(e) => setFormMapBase(e.target.value)}
+          type="number"
+          name="formMapBase"
           min="1"
         />
         <br />

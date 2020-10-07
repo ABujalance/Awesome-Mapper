@@ -7,6 +7,8 @@ const MapGrid = (props) => {
   const yMapSize = useSelector((state) => state.yMapSize);
   const showGrid = useSelector((state) => state.showGrid);
 
+  const mapBase = useSelector((state) => state.mapBase);
+
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -18,12 +20,12 @@ const MapGrid = (props) => {
     var cw = 0;
     var ch = 0;
 
-    for (var x = 0; x <= bw; x += 32) {
+    for (var x = 0; x <= bw; x += mapBase) {
       context.moveTo(0 + x + p, p);
       context.lineTo(0 + x + p, bh + p);
     }
 
-    for (var x = 0; x <= bh; x += 32) {
+    for (var x = 0; x <= bh; x += mapBase) {
       context.moveTo(p, 0 + x + p);
       context.lineTo(bw + p, 0 + x + p);
     }
@@ -40,8 +42,8 @@ const MapGrid = (props) => {
       ref={canvasRef}
       tabIndex="1000"
       id="gridCanvas"
-      width={xMapSize * 32}
-      height={yMapSize * 32}
+      width={xMapSize * mapBase}
+      height={yMapSize * mapBase}
       style={!showGrid ? { display: "none" } : {}}
     />
   );
