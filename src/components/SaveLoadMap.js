@@ -5,13 +5,20 @@ import Actions from "../Actions";
 const SaveLoadMap = (props) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
+  const saveFile = {
+    mapImages: state.mapImages,
+    mapLayers: state.mapLayers,
+    mapBase: state.mapBase,
+    xMapSize: state.xMapSize,
+    yMapSize: state.yMapSize,
+  };
   const onClickSave = () => {
     var file = new Blob([JSON.stringify(state)], {
       type: "text/plain;charset=utf-8",
     });
     var element = document.createElement("a");
     element.href = URL.createObjectURL(file);
-    element.download = "myFile.txt";
+    element.download = "map.tilp";
     document.body.appendChild(element); // Required for this to work in FireFox
     element.click();
   };
@@ -19,13 +26,12 @@ const SaveLoadMap = (props) => {
   async function onChangeHandler(event) {
     const file = event.target.files[0];
     event.target.value = null;
-    var newState = [];
+    var loadFile = [];
     try {
-      newState = JSON.parse(await file.text());
-      console.log(newState.awesomeMap);
+      loadFile = JSON.parse(await file.text());
       dispatch({
-        type: Actions.LOAD_MAP,
-        newState: newState,
+        type: Actions.START_LOAD,
+        loadFile: loadFile,
       });
     } catch (e) {
       alert("The file did not have the correct format");
@@ -43,7 +49,7 @@ const SaveLoadMap = (props) => {
           type="file"
           name="file"
           onChange={(evt) => onChangeHandler(evt)}
-          accept=".txt"
+          accept=".tilp"
         />
         <span>Load Map</span>
       </label>

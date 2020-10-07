@@ -9,7 +9,6 @@ import LayerSelector from "./components/LayerSelector";
 import SelectedTileDisplay from "./components/SelectedTileDisplay";
 import SelectBrushSize from "./components/SelectBrushSize.js";
 import PrintMap from "./components/PrintMap";
-import { folderImageStructure } from "./utilities/TileLibraryUtilities";
 import ToggleGrid from "./components/ToggleGrid";
 import SaveLoadMap from "./components/SaveLoadMap";
 var tileTypes = [];
@@ -19,7 +18,6 @@ const importAll = (r) => {
 };
 
 tileTypes = importAll(require.context("../public/images/", true));
-const structureFolder = folderImageStructure(tileTypes);
 console.log(require.context("../public/images/", false));
 console.log(tileTypes);
 function App() {

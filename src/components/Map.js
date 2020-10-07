@@ -7,11 +7,12 @@ const AwesomeMap = (props) => {
   const mapLayers = useSelector((state) => state.mapLayers);
   const showGrid = useSelector((state) => state.showGrid);
   const mapBase = useSelector((state) => state.mapBase);
+  const isLoadingMap = useSelector((state) => state.cleaisLoadingMaprMode);
   return (
     <div className="map-canvas-container">
-      <Layer layer={0} />
+      <Layer layer={0} isLoadingMap={isLoadingMap} />
       {Array.from(Array(mapLayers), (el, index) => {
-        return <Layer layer={index + 1} />;
+        return <Layer layer={index + 1} isLoadingMap={isLoadingMap} />;
       })}
       {showGrid ? <MapGrid mapBase={mapBase} /> : <div></div>}
     </div>

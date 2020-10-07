@@ -10,6 +10,8 @@ const MapLayer = (props) => {
   const draggedElement = useSelector((state) => state.draggedElement);
   const eraseMode = useSelector((state) => state.eraseMode);
   const selectedLayer = useSelector((state) => state.selectedLayer);
+  const mapImages = useSelector((state) => state.mapImages);
+  const isLoadingMap = useSelector((state) => state.isLoadingMap);
 
   const mapBase = useSelector((state) => state.mapBase);
   const clearMode = useSelector((state) => state.clearMode);
@@ -41,10 +43,44 @@ const MapLayer = (props) => {
     }
   };
 
-  const onMouseLeave = () => {
+  const saveMapState = () => {
+    const canvas = canvasRef.current;
+    var newMapImages = [...mapImages];
+
+    //Obtain base64 canvas image to save it
+    var imgUrl = canvas.toDataURL();
+    console.log(imgUrl);
+
+    newMapImages[props.layer] = imgUrl;
+    dispatch({
+      type: Actions.UPDATE_MAP_IMAGES,
+      mapImages: newMapImages,
+    });
+  };
+
+  const loadMapState = () => {
+    const canvas = canvasRef.current;
+    var ctx = canvas.getContext("2d");
+    var image = new Image();
+
+    image.src = mapImages[props.layer];
+
+    image.onload = function () {
+      ctx.drawImage(image, 0, 0);
+    };
+  };
+
+  const stopDrawing = () => {
     setMouseDown(false);
     setCurrentX(null);
     setCurrentY(null);
+    saveMapState();
+  };
+
+  const onMouseLeave = () => {
+    if (mouseDown) {
+      stopDrawing();
+    }
   };
 
   const onMouseMove = (evt) => {
@@ -58,9 +94,7 @@ const MapLayer = (props) => {
   };
 
   const onMouseUp = () => {
-    setMouseDown(false);
-    setCurrentX(null);
-    setCurrentY(null);
+    stopDrawing();
   };
 
   const handleKeyDown = (evt) => {
@@ -131,8 +165,15 @@ const MapLayer = (props) => {
       setCurrentY(y);
     }
   };
-  console.log("lays " + props.layer);
-  console.log(selectedLayer);
+
+  if (isLoadingMap && canvasRef.current) {
+    console.log("cagando");
+    loadMapState();
+    dispatch({
+      type: Actions.FINISH_LOAD,
+    });
+  }
+
   return (
     <canvas
       className="map-canvas"

@@ -10,6 +10,9 @@ const initialState = {
   eraseMode: false,
   mapBase: 32,
   clearMode: false,
+  mapImages: [[]],
+  isLoadingMap: false,
+  layersLoaded: -1,
 };
 export default function mapReducer(state = initialState, action) {
   switch (action.type) {
@@ -23,9 +26,10 @@ export default function mapReducer(state = initialState, action) {
         mapLayers: newLayers,
         xMapSize: xSize,
         yMapSize: ySize,
-        selectedLayer: null,
+        selectedLayer: 0,
         mapBase: Number(newMapBase),
         showGrid: false,
+        mapImages: [],
       };
     case ActionTypes.CHANGE_DRAGGED_ELEMENT:
       return { ...state, draggedElement: action.draggedElement };
@@ -35,21 +39,15 @@ export default function mapReducer(state = initialState, action) {
       return { ...state, brushSize: action.brushSize };
     case ActionTypes.ADD_LAYER:
       var newMapLayers = state.mapLayers + 1;
+      var newMapImages = [...state.mapImages];
+      newMapImages.push("");
       return {
         ...state,
         mapLayers: newMapLayers,
+        mapImages: newMapImages,
       };
     case ActionTypes.TOGGLE_GRID:
       return { ...state, showGrid: !state.showGrid };
-    case ActionTypes.LOAD_MAP:
-      const newState = action.newState;
-      return {
-        ...state,
-        xMapSize: newState.xMapSize,
-        yMapSize: newState.yMapSize,
-        mapLayers: newState.mapLayers,
-        awesomeMap: newState.awesomeMap,
-      };
     case ActionTypes.TOGGLE_ERASE_MODE:
       return {
         ...state,
@@ -60,6 +58,32 @@ export default function mapReducer(state = initialState, action) {
         ...state,
         clearMode: !state.clearMode,
       };
+    case ActionTypes.UPDATE_MAP_IMAGES:
+      return {
+        ...state,
+        mapImages: action.mapImages,
+      };
+    case ActionTypes.START_LOAD:
+      const loadFile = action.loadFile;
+      return {
+        ...state,
+        mapImages: loadFile.mapImages,
+        mapLayers: loadFile.mapLayers,
+        selectedLayer: 0,
+        isLoadingMap: true,
+        mapBase: loadFile.mapBase,
+        xMapSize: loadFile.xMapSize,
+        yMapSize: loadFile.yMapSize,
+      };
+    case ActionTypes.FINISH_LOAD:
+      var layersLoaded = state.layersLoaded;
+      layersLoaded++;
+      var isLoadingMap = true;
+      if (layersLoaded > state.mapLayers) {
+        return { ...state, isLoadingMap: false };
+      } else {
+        return { ...state };
+      }
     default:
       return state;
   }
