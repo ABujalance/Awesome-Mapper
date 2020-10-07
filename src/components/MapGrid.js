@@ -1,13 +1,11 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const MapGrid = (props) => {
-  const map = useSelector((state) => state.awesomeMap);
   const xMapSize = useSelector((state) => state.xMapSize);
   const yMapSize = useSelector((state) => state.yMapSize);
-  const showGrid = useSelector((state) => state.showGrid);
 
-  const mapBase = useSelector((state) => state.mapBase);
+  const mapBase = props.mapBase;
 
   const canvasRef = useRef(null);
 
@@ -16,25 +14,28 @@ const MapGrid = (props) => {
     const context = canvas.getContext("2d");
     const bw = context.canvas.width;
     const bh = context.canvas.height;
+    console.log(bw);
+    console.log(bh);
+    console.log(mapBase);
+    context.clearRect(0, 0, bw, bh);
+
     var p = 0;
-    var cw = 0;
-    var ch = 0;
+    console.log(p);
 
     for (var x = 0; x <= bw; x += mapBase) {
-      context.moveTo(0 + x + p, p);
-      context.lineTo(0 + x + p, bh + p);
+      context.moveTo(x + p, p);
+      context.lineTo(x + p, bh + p);
     }
 
     for (var x = 0; x <= bh; x += mapBase) {
-      context.moveTo(p, 0 + x + p);
-      context.lineTo(bw + p, 0 + x + p);
+      context.moveTo(p, x + p);
+      context.lineTo(bw + p, x + p);
     }
 
     context.strokeStyle = "black";
     context.stroke();
+    context.beginPath();
   }, []);
-
-  console.log(showGrid);
 
   return (
     <canvas
@@ -44,7 +45,6 @@ const MapGrid = (props) => {
       id="gridCanvas"
       width={xMapSize * mapBase}
       height={yMapSize * mapBase}
-      style={!showGrid ? { display: "none" } : {}}
     />
   );
 };

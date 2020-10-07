@@ -5,8 +5,8 @@ import Actions from "../Actions";
 const SelectBrushSize = (props) => {
   const dispatch = useDispatch();
   const selectedSize = useSelector((state) => state.brushSize);
-  const selectedTile = useSelector((state) => state.draggedElement);
   const eraseMode = useSelector((state) => state.eraseMode);
+  const clearMode = useSelector((state) => state.clearMode);
 
   const onClick = (evt, size) => {
     dispatch({
@@ -19,6 +19,12 @@ const SelectBrushSize = (props) => {
     dispatch({
       type: Actions.TOGGLE_ERASE_MODE,
       eraseMode: !eraseMode,
+    });
+  };
+
+  const clearLayer = () => {
+    dispatch({
+      type: Actions.TOGGLE_CLEAR_MODE,
     });
   };
 
@@ -97,6 +103,17 @@ const SelectBrushSize = (props) => {
             width="32px"
             height="32px"
           ></img>
+        </button>
+      </div>
+      <div className="aditional-brushes">
+        <button
+          onClick={(evt) => onClick(evt, 0)}
+          className={
+            clearMode ? "btn btn-outline-dark active" : "btn btn-outline-dark"
+          }
+          onClick={clearLayer}
+        >
+          Clear Layer
         </button>
       </div>
     </div>

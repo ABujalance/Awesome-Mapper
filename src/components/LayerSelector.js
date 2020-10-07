@@ -8,19 +8,20 @@ const LayerSelector = (props) => {
   const selectedLayer = useSelector((state) => state.selectedLayer);
   const mapLayers = useSelector((state) => state.mapLayers);
 
-  const onClick = (evt, selectedLayer) => {
+  const onClick = (evt, select) => {
     dispatch({
       type: Actions.SELECT_LAYER,
-      selectedLayer: selectedLayer,
+      selectedLayer: select,
     });
+    console.log("selected ", select);
   };
 
   return (
     <div>
       <button
-        onClick={(evt) => onClick(evt)}
+        onClick={(evt) => onClick(evt, 0)}
         className={
-          !selectedLayer && selectedLayer != 0
+          selectedLayer === 0
             ? "btn btn-outline-dark active"
             : "btn btn-outline-dark"
         }
@@ -30,9 +31,9 @@ const LayerSelector = (props) => {
       {Array.from(Array(mapLayers), (el, index) => {
         return (
           <button
-            onClick={(evt) => onClick(evt, index)}
+            onClick={(evt) => onClick(evt, index + 1)}
             className={
-              selectedLayer === index
+              selectedLayer === index + 1
                 ? "btn btn-outline-dark active"
                 : "btn btn-outline-dark"
             }

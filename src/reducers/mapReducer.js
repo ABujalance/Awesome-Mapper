@@ -2,13 +2,14 @@ import ActionTypes from "../Actions";
 const initialState = {
   draggedElement: "",
   mapLayers: 0,
-  selectedLayer: null,
+  selectedLayer: 0,
   brushSize: 1,
   xMapSize: 10,
   yMapSize: 10,
   showGrid: false,
   eraseMode: false,
   mapBase: 32,
+  clearMode: false,
 };
 export default function mapReducer(state = initialState, action) {
   switch (action.type) {
@@ -23,7 +24,8 @@ export default function mapReducer(state = initialState, action) {
         xMapSize: xSize,
         yMapSize: ySize,
         selectedLayer: null,
-        mapBase: newMapBase,
+        mapBase: Number(newMapBase),
+        showGrid: false,
       };
     case ActionTypes.CHANGE_DRAGGED_ELEMENT:
       return { ...state, draggedElement: action.draggedElement };
@@ -52,6 +54,11 @@ export default function mapReducer(state = initialState, action) {
       return {
         ...state,
         eraseMode: action.eraseMode,
+      };
+    case ActionTypes.TOGGLE_CLEAR_MODE:
+      return {
+        ...state,
+        clearMode: !state.clearMode,
       };
     default:
       return state;

@@ -12,6 +12,7 @@ const MapLayer = (props) => {
   const selectedLayer = useSelector((state) => state.selectedLayer);
 
   const mapBase = useSelector((state) => state.mapBase);
+  const clearMode = useSelector((state) => state.clearMode);
 
   const [mouseDown, setMouseDown] = useState(false);
   const [currentX, setCurrentX] = useState(null);
@@ -20,11 +21,23 @@ const MapLayer = (props) => {
   const canvasRef = useRef(null);
 
   const onMouseDown = (evt) => {
-    setMouseDown(true);
-    if (eraseMode) {
-      removeTile(evt);
+    if (clearMode) {
+      if (
+        window.confirm(
+          "Are you sure you want to delete the contents of the layer?"
+        )
+      ) {
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
     } else {
-      addTile(evt);
+      setMouseDown(true);
+      if (eraseMode) {
+        removeTile(evt);
+      } else {
+        addTile(evt);
+      }
     }
   };
 
@@ -118,26 +131,25 @@ const MapLayer = (props) => {
       setCurrentY(y);
     }
   };
-  if (selectedLayer >= props.layer) {
-    return (
-      <canvas
-        className="map-canvas"
-        onMouseDown={(evt) => onMouseDown(evt)}
-        onMouseUp={() => onMouseUp()}
-        onMouseLeave={() => onMouseLeave()}
-        onMouseMove={(evt) => onMouseMove(evt)}
-        onKeyDown={(evt) => handleKeyDown(evt)}
-        onKeyUp={(evt) => handleKeyUp(evt)}
-        ref={canvasRef}
-        tabIndex="1000"
-        id="myCanvas"
-        width={xMapSize * mapBase}
-        height={yMapSize * mapBase}
-      />
-    );
-  } else {
-    return <div></div>;
-  }
+  console.log("lays " + props.layer);
+  console.log(selectedLayer);
+  return (
+    <canvas
+      className="map-canvas"
+      onMouseDown={(evt) => onMouseDown(evt)}
+      onMouseUp={() => onMouseUp()}
+      onMouseLeave={() => onMouseLeave()}
+      onMouseMove={(evt) => onMouseMove(evt)}
+      onKeyDown={(evt) => handleKeyDown(evt)}
+      onKeyUp={(evt) => handleKeyUp(evt)}
+      ref={canvasRef}
+      tabIndex="1000"
+      id={"myCanvas-" + props.layer}
+      width={xMapSize * mapBase}
+      height={yMapSize * mapBase}
+      style={selectedLayer < props.layer ? { display: "none" } : {}}
+    />
+  );
 };
 
 export default MapLayer;

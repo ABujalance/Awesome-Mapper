@@ -14,7 +14,6 @@ const NewMapForm = (props) => {
 
   const handleNewMapSubmit = (e) => {
     e.preventDefault();
-    console.log(formMapBase);
     dispatch({
       type: Actions.CREATE_MAP,
       xSize: xTiles,
