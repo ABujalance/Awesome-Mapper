@@ -30,6 +30,7 @@ export default function mapReducer(state = initialState, action) {
         mapBase: Number(newMapBase),
         showGrid: false,
         mapImages: [],
+        isLoadingMap: false,
       };
     case ActionTypes.CHANGE_DRAGGED_ELEMENT:
       return { ...state, draggedElement: action.draggedElement };
@@ -78,11 +79,10 @@ export default function mapReducer(state = initialState, action) {
     case ActionTypes.FINISH_LOAD:
       var layersLoaded = state.layersLoaded;
       layersLoaded++;
-      var isLoadingMap = true;
       if (layersLoaded > state.mapLayers) {
-        return { ...state, isLoadingMap: false };
+        return { ...state, isLoadingMap: false, layersLoaded: -1 };
       } else {
-        return { ...state };
+        return { ...state, layersLoaded: layersLoaded };
       }
     default:
       return state;

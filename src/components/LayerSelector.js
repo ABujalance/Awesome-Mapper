@@ -31,6 +31,7 @@ const LayerSelector = (props) => {
       {Array.from(Array(mapLayers), (el, index) => {
         return (
           <button
+            className="close-wrapper"
             onClick={(evt) => onClick(evt, index + 1)}
             className={
               selectedLayer === index + 1
@@ -39,6 +40,7 @@ const LayerSelector = (props) => {
             }
           >
             Layer {index + 1}
+            <span className="close" />
           </button>
         );
       })}
