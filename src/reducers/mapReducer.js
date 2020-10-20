@@ -13,6 +13,7 @@ const initialState = {
   mapImages: [[]],
   isLoadingMap: false,
   layersLoaded: -1,
+  undoStack:[]
 };
 export default function mapReducer(state = initialState, action) {
   switch (action.type) {
@@ -31,11 +32,12 @@ export default function mapReducer(state = initialState, action) {
         showGrid: false,
         mapImages: [],
         isLoadingMap: false,
+        undoStack:[]
       };
     case ActionTypes.CHANGE_DRAGGED_ELEMENT:
       return { ...state, draggedElement: action.draggedElement };
     case ActionTypes.SELECT_LAYER:
-      return { ...state, selectedLayer: action.selectedLayer };
+      return { ...state, selectedLayer: action.selectedLayer, undoStack:[] };
     case ActionTypes.SET_BRUSH_SIZE:
       return { ...state, brushSize: action.brushSize };
     case ActionTypes.ADD_LAYER:
@@ -63,6 +65,7 @@ export default function mapReducer(state = initialState, action) {
       return {
         ...state,
         mapImages: action.mapImages,
+
       };
     case ActionTypes.START_LOAD:
       const loadFile = action.loadFile;
@@ -84,6 +87,9 @@ export default function mapReducer(state = initialState, action) {
       } else {
         return { ...state, layersLoaded: layersLoaded };
       }
+    case ActionTypes.SET_UNDO_STACK:
+      return { ...state, undoStack:action.undoStack };
+
     default:
       return state;
   }

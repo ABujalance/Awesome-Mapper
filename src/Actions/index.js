@@ -12,6 +12,7 @@ const CounterTypes = {
   UPDATE_MAP_IMAGES: "UPDATE_MAP_IMAGES",
   FINISH_LOAD: "FINISH_LOAD",
   START_LOAD: "START_LOAD",
+  SET_UNDO_STACK: "SET_UNDO_STACK"
 };
 export default {
   ...CounterTypes,

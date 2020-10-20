@@ -11,6 +11,7 @@ const MapLayer = (props) => {
   const eraseMode = useSelector((state) => state.eraseMode);
   const selectedLayer = useSelector((state) => state.selectedLayer);
   const mapImages = useSelector((state) => state.mapImages);
+  const undoStack = useSelector((state) => state.undoStack);
   const isLoadingMap = useSelector((state) => state.isLoadingMap);
 
   const mapBase = useSelector((state) => state.mapBase);
@@ -43,20 +44,53 @@ const MapLayer = (props) => {
     }
   };
 
+  const handleKeyDown = (evt) => {
+    if(evt.ctrlKey){
+      if (evt.keyCode === 90) {
+       undo();
+      }
+    }
+  }
   const saveMapState = () => {
     const canvas = canvasRef.current;
     var newMapImages = [...mapImages];
 
     //Obtain base64 canvas image to save it
     var imgUrl = canvas.toDataURL();
-    console.log(imgUrl);
 
     newMapImages[props.layer] = imgUrl;
     dispatch({
       type: Actions.UPDATE_MAP_IMAGES,
       mapImages: newMapImages,
     });
+    var newUndoStack = [...undoStack]
+    newUndoStack.push(imgUrl)
+    dispatch({
+      type: Actions.SET_UNDO_STACK,
+      undoStack: newUndoStack,
+    });
   };
+
+  const undo=()=>{
+    var newUndoStack = [...undoStack]
+    newUndoStack.pop()
+    const undoImage =  newUndoStack[newUndoStack.length - 1];
+    console.log(undoImage)
+    const canvas = canvasRef.current;
+    var ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    var image = new Image();
+
+    image.src =undoImage;
+
+    image.onload = function () {
+      ctx.drawImage(image, 0, 0);
+    };
+    dispatch({
+      type: Actions.SET_UNDO_STACK,
+      undoStack: newUndoStack,
+    });
+  }
 
   const loadMapState = () => {
     const canvas = canvasRef.current;
@@ -97,23 +131,8 @@ const MapLayer = (props) => {
     stopDrawing();
   };
 
-  const handleKeyDown = (evt) => {
-    if (evt.key === "Shift") {
-      dispatch({
-        type: Actions.TOGGLE_ERASE_MODE,
-        eraseMode: true,
-      });
-    }
-  };
 
-  const handleKeyUp = (evt) => {
-    if (evt.key === "Shift") {
-      dispatch({
-        type: Actions.TOGGLE_ERASE_MODE,
-        eraseMode: false,
-      });
-    }
-  };
+
 
   const roundNumber = (coordinate) => {
     const simpleBaseCoordinate = coordinate / mapBase;
@@ -177,12 +196,11 @@ const MapLayer = (props) => {
   return (
     <canvas
       className="map-canvas"
+      onKeyDown={(evt) => handleKeyDown(evt)}
       onMouseDown={(evt) => onMouseDown(evt)}
       onMouseUp={() => onMouseUp()}
       onMouseLeave={() => onMouseLeave()}
       onMouseMove={(evt) => onMouseMove(evt)}
-      onKeyDown={(evt) => handleKeyDown(evt)}
-      onKeyUp={(evt) => handleKeyUp(evt)}
       ref={canvasRef}
       tabIndex="1000"
       id={"myCanvas-" + props.layer}

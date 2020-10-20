@@ -72,6 +72,7 @@
 
 .grid {
   z-index: 9999;
+  pointer-events: none;
 }
 
 .toggle-grid {
@@ -162,25 +163,6 @@ label.upload-map input[type="file"] {
   z-index: 1;
 }
 
-.small-pointer:hover {
-  cursor: url("img/small-draw-pointer.png") 16 16, auto;
-}
-.medium-pointer:hover {
-  cursor: url("img/medium-draw-pointer.png") 16 16, auto;
-}
-.big-pointer:hover {
-  cursor: url("img/big-draw-pointer.png") 16 16, auto;
-}
-
-.fill-pointer:hover {
-  cursor: url("img/fill-draw-pointer.png") 16 16, auto;
-}
-
-.eraser {
-  background-image: url("img/eraser-64.png");
-  height: 64px;
-  width: 64px;
-}
 .btn-tile-selection {
   background-size: cover;
 }
@@ -196,4 +178,14 @@ label.upload-map input[type="file"] {
   display: block;
   z-index: 2;
   background: transparent;
+}
+
+.brush-pointer:hover {
+  cursor: url("img/brush.png") 0 32, auto;
+}
+.eraser-pointer:hover {
+  cursor: url("img/eraser.png") 16 24, auto;
+}
+.bucket-pointer:hover {
+  cursor: url("img/bucket.png") 0 0, auto;
 }
