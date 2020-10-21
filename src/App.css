@@ -189,3 +189,9 @@ label.upload-map input[type="file"] {
 .bucket-pointer:hover {
   cursor: url("img/bucket.png") 0 0, auto;
 }
+
+.small {
+  float: left;
+  margin-left: 4px;
+  width: 10px;
+}

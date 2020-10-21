@@ -23,12 +23,10 @@ tileTypes = importAll(require.context("../public/images/", true));
 console.log(require.context("../public/images/", false));
 console.log(tileTypes);
 function App() {
-
   const dispatch = useDispatch();
 
-
   const handleKeyDown = (evt) => {
-    if(evt.altKey){
+    if (evt.altKey) {
       if (evt.keyCode === 49) {
         dispatch({
           type: Actions.SET_BRUSH_SIZE,
@@ -47,7 +45,7 @@ function App() {
           brushSize: 4,
         });
       }
-      if (evt.key === "Shift") {
+      if (evt.ctrlKey) {
         dispatch({
           type: Actions.SET_BRUSH_SIZE,
           brushSize: 0,
@@ -72,7 +70,11 @@ function App() {
   };
 
   return (
-    <div  tabIndex="2000" onKeyDown={(evt) => handleKeyDown(evt)}  onKeyUp={(evt) => handleKeyUp(evt)}>
+    <div
+      tabIndex="2000"
+      onKeyDown={(evt) => handleKeyDown(evt)}
+      onKeyUp={(evt) => handleKeyUp(evt)}
+    >
       <header></header>
       <body className="App-body">
         <div className="App-controls">

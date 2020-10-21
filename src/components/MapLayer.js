@@ -13,6 +13,7 @@ const MapLayer = (props) => {
   const mapImages = useSelector((state) => state.mapImages);
   const undoStack = useSelector((state) => state.undoStack);
   const isLoadingMap = useSelector((state) => state.isLoadingMap);
+  const deletedLayers = useSelector((state) => state.deletedLayers);
 
   const mapBase = useSelector((state) => state.mapBase);
   const clearMode = useSelector((state) => state.clearMode);
@@ -45,12 +46,12 @@ const MapLayer = (props) => {
   };
 
   const handleKeyDown = (evt) => {
-    if(evt.ctrlKey){
+    if (evt.ctrlKey) {
       if (evt.keyCode === 90) {
-       undo();
+        undo();
       }
     }
-  }
+  };
   const saveMapState = () => {
     const canvas = canvasRef.current;
     var newMapImages = [...mapImages];
@@ -63,25 +64,25 @@ const MapLayer = (props) => {
       type: Actions.UPDATE_MAP_IMAGES,
       mapImages: newMapImages,
     });
-    var newUndoStack = [...undoStack]
-    newUndoStack.push(imgUrl)
+    var newUndoStack = [...undoStack];
+    newUndoStack.push(imgUrl);
     dispatch({
       type: Actions.SET_UNDO_STACK,
       undoStack: newUndoStack,
     });
   };
 
-  const undo=()=>{
-    var newUndoStack = [...undoStack]
-    newUndoStack.pop()
-    const undoImage =  newUndoStack[newUndoStack.length - 1];
-    console.log(undoImage)
+  const undo = () => {
+    var newUndoStack = [...undoStack];
+    newUndoStack.pop();
+    const undoImage = newUndoStack[newUndoStack.length - 1];
+    console.log(undoImage);
     const canvas = canvasRef.current;
     var ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     var image = new Image();
 
-    image.src =undoImage;
+    image.src = undoImage;
 
     image.onload = function () {
       ctx.drawImage(image, 0, 0);
@@ -90,7 +91,7 @@ const MapLayer = (props) => {
       type: Actions.SET_UNDO_STACK,
       undoStack: newUndoStack,
     });
-  }
+  };
 
   const loadMapState = () => {
     const canvas = canvasRef.current;
@@ -130,9 +131,6 @@ const MapLayer = (props) => {
   const onMouseUp = () => {
     stopDrawing();
   };
-
-
-
 
   const roundNumber = (coordinate) => {
     const simpleBaseCoordinate = coordinate / mapBase;

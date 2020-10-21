@@ -13,7 +13,8 @@ const initialState = {
   mapImages: [[]],
   isLoadingMap: false,
   layersLoaded: -1,
-  undoStack:[]
+  undoStack: [],
+  deletedLayers: [],
 };
 export default function mapReducer(state = initialState, action) {
   switch (action.type) {
@@ -32,12 +33,31 @@ export default function mapReducer(state = initialState, action) {
         showGrid: false,
         mapImages: [],
         isLoadingMap: false,
-        undoStack:[]
+        undoStack: [],
+        deletedLayers: [],
       };
     case ActionTypes.CHANGE_DRAGGED_ELEMENT:
       return { ...state, draggedElement: action.draggedElement };
     case ActionTypes.SELECT_LAYER:
-      return { ...state, selectedLayer: action.selectedLayer, undoStack:[] };
+      var newSelectedLayer = action.selectedLayer;
+      const deletedLayers = state.deletedLayers;
+      if (deletedLayers.includes(newSelectedLayer - 1)) {
+        newSelectedLayer = state.selectedLayer;
+      }
+      return { ...state, selectedLayer: newSelectedLayer, undoStack: [] };
+    case ActionTypes.DELETE_LAYER:
+      const deletedLayer = action.deletedLayer;
+      var newDeletedLayers = [...state.deletedLayers];
+      var newSelectedLayer = state.selectedLayer;
+      if (newSelectedLayer === deletedLayer + 1) {
+        newSelectedLayer = newSelectedLayer - 1;
+      }
+      newDeletedLayers.push(deletedLayer);
+      return {
+        ...state,
+        selectedLayer: newSelectedLayer,
+        deletedLayers: newDeletedLayers,
+      };
     case ActionTypes.SET_BRUSH_SIZE:
       return { ...state, brushSize: action.brushSize };
     case ActionTypes.ADD_LAYER:
@@ -65,7 +85,6 @@ export default function mapReducer(state = initialState, action) {
       return {
         ...state,
         mapImages: action.mapImages,
-
       };
     case ActionTypes.START_LOAD:
       const loadFile = action.loadFile;
@@ -88,7 +107,7 @@ export default function mapReducer(state = initialState, action) {
         return { ...state, layersLoaded: layersLoaded };
       }
     case ActionTypes.SET_UNDO_STACK:
-      return { ...state, undoStack:action.undoStack };
+      return { ...state, undoStack: action.undoStack };
 
     default:
       return state;

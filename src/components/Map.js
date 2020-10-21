@@ -10,22 +10,23 @@ const AwesomeMap = (props) => {
   const isLoadingMap = useSelector((state) => state.cleaisLoadingMaprMode);
   const brushSize = useSelector((state) => state.brushSize);
   const eraseMode = useSelector((state) => state.eraseMode);
+  const deletedLayers = useSelector((state) => state.deletedLayers);
 
-  var mapClass="map-canvas-container"
-  if(eraseMode){
-    mapClass = mapClass.concat(" eraser-pointer")
-  }
-  else if(brushSize===0){
-    mapClass=mapClass.concat(" bucket-pointer")
-  }
-  else{
-    mapClass=mapClass.concat(" brush-pointer")
+  var mapClass = "map-canvas-container";
+  if (eraseMode) {
+    mapClass = mapClass.concat(" eraser-pointer");
+  } else if (brushSize === 0) {
+    mapClass = mapClass.concat(" bucket-pointer");
+  } else {
+    mapClass = mapClass.concat(" brush-pointer");
   }
   return (
     <div className={mapClass}>
       <Layer layer={0} isLoadingMap={isLoadingMap} />
       {Array.from(Array(mapLayers), (el, index) => {
-        return <Layer layer={index + 1} isLoadingMap={isLoadingMap} />;
+        if (!deletedLayers.includes(index)) {
+          return <Layer layer={index + 1} isLoadingMap={isLoadingMap} />;
+        }
       })}
       {showGrid ? <MapGrid mapBase={mapBase} /> : <div></div>}
     </div>
