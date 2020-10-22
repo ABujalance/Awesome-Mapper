@@ -222,6 +222,9 @@ label.upload-tiles input[type="file"] {
 .bucket-pointer:hover {
   cursor: url("img/bucket.png") 0 0, auto;
 }
+.clear-pointer:hover {
+  cursor: url("img/clear.png") 0 0, auto;
+}
 
 .layer-selector {
   display: flex;

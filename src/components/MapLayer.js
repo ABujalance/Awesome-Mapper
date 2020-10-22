@@ -13,7 +13,6 @@ const MapLayer = (props) => {
   const mapImages = useSelector((state) => state.mapImages);
   const undoStack = useSelector((state) => state.undoStack);
   const isLoadingMap = useSelector((state) => state.isLoadingMap);
-  const deletedLayers = useSelector((state) => state.deletedLayers);
 
   const mapBase = useSelector((state) => state.mapBase);
   const clearMode = useSelector((state) => state.clearMode);

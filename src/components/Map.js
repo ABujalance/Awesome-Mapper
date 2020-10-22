@@ -10,12 +10,15 @@ const AwesomeMap = (props) => {
   const isLoadingMap = useSelector((state) => state.cleaisLoadingMaprMode);
   const brushSize = useSelector((state) => state.brushSize);
   const eraseMode = useSelector((state) => state.eraseMode);
+  const clearMode = useSelector((state) => state.clearMode);
   const deletedLayers = useSelector((state) => state.deletedLayers);
 
   var mapClass = "map-canvas-container";
-  if (eraseMode) {
-    mapClass = mapClass.concat(" eraser-pointer");
+  if (clearMode) {
+    mapClass = mapClass.concat(" clear-pointer");
   } else if (brushSize === 0) {
+    mapClass = mapClass.concat(" eraser-pointer");
+  } else if (eraseMode) {
     mapClass = mapClass.concat(" bucket-pointer");
   } else {
     mapClass = mapClass.concat(" brush-pointer");
