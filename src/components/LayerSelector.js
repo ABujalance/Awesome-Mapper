@@ -62,7 +62,7 @@ const LayerSelector = (props) => {
     }
   };
 
-  const editLayerName = (evt, index) => {
+  const editLayerName = (index) => {
     setEditLayer(index);
     setEditLayerInput(layerNames[index]);
   };
@@ -123,7 +123,7 @@ const LayerSelector = (props) => {
                   <span className="layer-name">{layerNames[index]}</span>
                   <div className="layer-actions">
                     <span
-                      onClick={(evt) => editLayerName(evt, index)}
+                      onClick={() => editLayerName(index)}
                       className="close"
                     >
                       <FaEdit className=" edit-layer" />
