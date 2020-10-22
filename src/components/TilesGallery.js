@@ -136,25 +136,31 @@ const TilesGallery = (props) => {
         </TabList>
         {customTiles.map((customTileCollection, index) => {
           return (
-            <TabPanel className="tiles-gallery">
-              {customTileCollection.tiles.map((tileName) => {
-                return (
-                  <div
-                    className="drag-tile"
-                    onClick={(event) => onClick(event, tileName)}
-                  >
-                    <img src={tileName}></img>
-                  </div>
-                );
-              })}
-              <input
-                id="loadMap"
-                type="file"
-                name="file"
-                onChange={(evt) => onChangeHandler(evt, index)}
-                accept=".png"
-                multiple
-              />
+            <TabPanel className="tiles-panel">
+              <div className="tiles-gallery">
+                {customTileCollection.tiles.map((tileName) => {
+                  return (
+                    <div
+                      className="drag-tile"
+                      onClick={(event) => onClick(event, tileName)}
+                    >
+                      <img src={tileName}></img>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <label class="upload-tiles">
+                <input
+                  id="loadTiles"
+                  type="file"
+                  name="file"
+                  onChange={(evt) => onChangeHandler(evt, index)}
+                  accept=".png"
+                  multiple
+                />
+                <span>Add Tiles</span>
+              </label>
             </TabPanel>
           );
         })}

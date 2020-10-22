@@ -58,6 +58,7 @@
 .tiles-gallery {
   display: flex !important;
   padding: 5px;
+  flex-wrap: wrap;
 }
 
 .brush-selector {
@@ -92,6 +93,11 @@ input[type="checkbox"] {
   flex-direction: column;
 }
 
+.tiles-panel {
+  display: flex;
+  flex-direction: column;
+}
+
 label.upload-map input[type="file"] {
   position: absolute;
   top: -1000px;
@@ -116,6 +122,33 @@ label.upload-map input[type="file"] {
   color: #a44;
 }
 .upload-map :valid + span {
+  color: #4a4;
+}
+
+label.upload-tiles input[type="file"] {
+  position: absolute;
+  top: -1000px;
+}
+
+.upload-tiles {
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  padding: 2px 5px;
+  margin: 2px;
+  background: #ddd;
+  display: inline-block;
+}
+
+.upload-tiles:hover {
+  background: #ccc;
+}
+.upload-tiles:active {
+  background: #ccf;
+}
+.upload-tiles :invalid + span {
+  color: #a44;
+}
+.upload-tiles :valid + span {
   color: #4a4;
 }
 
