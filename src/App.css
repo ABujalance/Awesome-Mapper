@@ -190,8 +190,35 @@ label.upload-map input[type="file"] {
   cursor: url("img/bucket.png") 0 0, auto;
 }
 
-.small {
-  float: left;
-  margin-left: 4px;
+.layer-selector {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.layer-name {
+  margin: auto;
+}
+
+.layer-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 5px;
+}
+
+.delete-layer {
   width: 10px;
+  margin: auto;
+  margin-left: 5px;
+}
+
+.edit-layer {
+  width: 15px;
+  margin: auto;
+  margin-left: 5px;
+}
+
+.save-layer {
+  width: 15px;
+  margin: auto;
+  margin-left: 5px;
 }

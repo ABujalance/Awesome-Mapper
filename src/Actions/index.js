@@ -14,6 +14,7 @@ const CounterTypes = {
   START_LOAD: "START_LOAD",
   SET_UNDO_STACK: "SET_UNDO_STACK",
   DELETE_LAYER: "DELETE_LAYER",
+  CHANGE_LAYER_NAMES: "CHANGE_LAYER_NAMES",
 };
 export default {
   ...CounterTypes,

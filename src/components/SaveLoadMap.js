@@ -11,6 +11,8 @@ const SaveLoadMap = (props) => {
     mapBase: state.mapBase,
     xMapSize: state.xMapSize,
     yMapSize: state.yMapSize,
+    deletedLayers: state.deletedLayers,
+    layerNames: state.layerNames,
   };
   const onClickSave = () => {
     var file = new Blob([JSON.stringify(state)], {
@@ -29,6 +31,12 @@ const SaveLoadMap = (props) => {
     var loadFile = [];
     try {
       loadFile = JSON.parse(await file.text());
+      dispatch({
+        type: Actions.CREATE_MAP,
+        xSize: 16,
+        YSize: 10,
+        mapBase: 32,
+      });
       dispatch({
         type: Actions.START_LOAD,
         loadFile: loadFile,

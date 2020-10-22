@@ -15,6 +15,7 @@ const initialState = {
   layersLoaded: -1,
   undoStack: [],
   deletedLayers: [],
+  layerNames: [],
 };
 export default function mapReducer(state = initialState, action) {
   switch (action.type) {
@@ -35,6 +36,7 @@ export default function mapReducer(state = initialState, action) {
         isLoadingMap: false,
         undoStack: [],
         deletedLayers: [],
+        layerNames: [],
       };
     case ActionTypes.CHANGE_DRAGGED_ELEMENT:
       return { ...state, draggedElement: action.draggedElement };
@@ -64,10 +66,18 @@ export default function mapReducer(state = initialState, action) {
       var newMapLayers = state.mapLayers + 1;
       var newMapImages = [...state.mapImages];
       newMapImages.push("");
+      var newLayerNames = [...state.layerNames];
+      newLayerNames.push("New Layer");
       return {
         ...state,
         mapLayers: newMapLayers,
         mapImages: newMapImages,
+        layerNames: newLayerNames,
+      };
+    case ActionTypes.CHANGE_LAYER_NAMES:
+      return {
+        ...state,
+        layerNames: action.layerNames,
       };
     case ActionTypes.TOGGLE_GRID:
       return { ...state, showGrid: !state.showGrid };
@@ -97,6 +107,8 @@ export default function mapReducer(state = initialState, action) {
         mapBase: loadFile.mapBase,
         xMapSize: loadFile.xMapSize,
         yMapSize: loadFile.yMapSize,
+        deletedLayers: loadFile.deletedLayers,
+        layerNames: loadFile.layerNames,
       };
     case ActionTypes.FINISH_LOAD:
       var layersLoaded = state.layersLoaded;

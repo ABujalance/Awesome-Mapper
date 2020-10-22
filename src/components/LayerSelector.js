@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Actions from "../Actions";
 import AddLayer from "./AddLayer";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaEdit, FaCheck } from "react-icons/fa";
 
 const LayerSelector = (props) => {
   const dispatch = useDispatch();
   const selectedLayer = useSelector((state) => state.selectedLayer);
   const mapLayers = useSelector((state) => state.mapLayers);
   const deletedLayers = useSelector((state) => state.deletedLayers);
+  const layerNames = useSelector((state) => state.layerNames);
+  const [editLayer, setEditLayer] = useState();
+  const [editLayerInput, setEditLayerInput] = useState("");
+
+  const inputLayerName = useRef(null);
+  useEffect(() => {
+    if (inputLayerName.current) {
+      inputLayerName.current.focus();
+    }
+  });
 
   const onClick = (evt, select) => {
     dispatch({
@@ -17,12 +27,31 @@ const LayerSelector = (props) => {
     });
   };
 
+  const handleKeyDown = (evt, index) => {
+    if (evt.key === "Enter") {
+      saveLayerName(index);
+    }
+    if (evt.keyCode === 27) {
+      saveLayerName(index);
+    }
+  };
+
+  const saveLayerName = (index) => {
+    var newLayerNames = [...layerNames];
+    newLayerNames[index] = editLayerInput;
+    dispatch({
+      type: Actions.CHANGE_LAYER_NAMES,
+      layerNames: newLayerNames,
+    });
+    setEditLayerInput("");
+    setEditLayer();
+  };
+
   const deleteLayer = (evt, deletedLayer) => {
     if (
       window.confirm(
         "Do you want to delete the Layer called " +
-          "Layer " +
-          (deletedLayer + 1) +
+          layerNames[deletedLayer] +
           "? This action cannot be undone"
       )
     ) {
@@ -31,6 +60,11 @@ const LayerSelector = (props) => {
         deletedLayer: deletedLayer,
       });
     }
+  };
+
+  const editLayerName = (evt, index) => {
+    setEditLayer(index);
+    setEditLayerInput(layerNames[index]);
   };
 
   return (
@@ -49,21 +83,60 @@ const LayerSelector = (props) => {
         if (!deletedLayers.includes(index)) {
           return (
             <button
-              className="close-wrapper"
               onClick={(evt) => onClick(evt, index + 1)}
+              onDoubleClick={() => {
+                editLayerName(index);
+              }}
               className={
                 selectedLayer === index + 1
                   ? "btn btn-outline-dark active"
                   : "btn btn-outline-dark"
               }
             >
-              <span>Layer {index + 1}</span>
-              <span
-                onClick={(evt) => deleteLayer(evt, index)}
-                className="close small"
-              >
-                <FaTrash className="small" />
-              </span>
+              {editLayer === index ? (
+                <span className="layer-selector" tabIndex="200">
+                  <span className="layer-name">
+                    <input
+                      ref={inputLayerName}
+                      onBlur={() => {
+                        saveLayerName(index);
+                      }}
+                      type="text"
+                      value={editLayerInput}
+                      onChange={(evt) => {
+                        setEditLayerInput(evt.target.value);
+                      }}
+                      onKeyDown={(evt) => handleKeyDown(evt, index)}
+                    ></input>
+                  </span>
+                  <div className="layer-actions">
+                    <span
+                      onClick={(evt) => saveLayerName(evt, index)}
+                      className="close"
+                    >
+                      <FaCheck className=" save-layer" />
+                    </span>
+                  </div>
+                </span>
+              ) : (
+                <span className="layer-selector">
+                  <span className="layer-name">{layerNames[index]}</span>
+                  <div className="layer-actions">
+                    <span
+                      onClick={(evt) => editLayerName(evt, index)}
+                      className="close"
+                    >
+                      <FaEdit className=" edit-layer" />
+                    </span>
+                    <span
+                      onClick={(evt) => deleteLayer(evt, index)}
+                      className="close"
+                    >
+                      <FaTrash className=" delete-layer" />
+                    </span>
+                  </div>
+                </span>
+              )}
             </button>
           );
         }

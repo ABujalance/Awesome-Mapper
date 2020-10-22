@@ -4,7 +4,7 @@ import Actions from "../Actions";
 import { Collapse, Button, CardBody, Card } from "reactstrap";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import { FaEdit, FaCheck } from "react-icons/fa";
+import { FaEdit, FaCheck, FaPlus } from "react-icons/fa";
 
 const TilesGallery = (props) => {
   const dispatch = useDispatch();
@@ -54,22 +54,28 @@ const TilesGallery = (props) => {
     setEditFolder("");
   };
 
-  async function onChangeHandler(event) {
+  async function onChangeHandler(event, collectionIndex) {
+    const files = event.target.files;
+    console.table(customTiles);
+    const oldTiles = customTiles[collectionIndex].tiles;
+    var newTiles = [...oldTiles];
+    for (var i = 0; i < files.length; i++) {
+      const file = event.target.files[i];
+      var objectURL = URL.createObjectURL(file);
+      newTiles.push(objectURL);
+    }
+    var newTilesSet = [...customTiles];
+    newTilesSet[collectionIndex].tiles = newTiles;
+    setCustomTiles(newTilesSet);
+    event.target.value = null;
+  }
+
+  function addFolder(event) {
     var newCustomCollection = {
       folderName: "Custom collection " + Number(customTiles.length + 1),
       tiles: [],
     };
-    var newCustomImages = [];
-    const files = event.target.files;
-    for (var i = 0; i < files.length; i++) {
-      const file = event.target.files[i];
-      var objectURL = URL.createObjectURL(file);
-      newCustomImages.push(objectURL);
-    }
-    newCustomCollection.tiles = newCustomImages;
-    console.log(newCustomCollection);
     setCustomTiles([...customTiles, newCustomCollection]);
-    event.target.value = null;
   }
 
   return (
@@ -124,18 +130,11 @@ const TilesGallery = (props) => {
               );
             }
           })}
-          <Tab>
-            <input
-              id="loadMap"
-              type="file"
-              name="file"
-              onChange={(evt) => onChangeHandler(evt)}
-              accept=".png"
-              multiple
-            />
+          <Tab onClick={(evt) => addFolder(evt)}>
+            <FaPlus />
           </Tab>
         </TabList>
-        {customTiles.map((customTileCollection) => {
+        {customTiles.map((customTileCollection, index) => {
           return (
             <TabPanel className="tiles-gallery">
               {customTileCollection.tiles.map((tileName) => {
@@ -148,6 +147,14 @@ const TilesGallery = (props) => {
                   </div>
                 );
               })}
+              <input
+                id="loadMap"
+                type="file"
+                name="file"
+                onChange={(evt) => onChangeHandler(evt, index)}
+                accept=".png"
+                multiple
+              />
             </TabPanel>
           );
         })}
